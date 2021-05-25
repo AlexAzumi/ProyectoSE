@@ -11,13 +11,12 @@ using std::cout;
 
 /**
  * - Integrantes del equipo -
- * Hernández Suárez Cesar Alejandro (Nuevo líder)
+ * Hernández Suárez Cesar Alejandro
  * Guillen Aguallo Diego
  * Gonzalez Barrientos Alberto
  * Valdivia Nario Julián André
  * Bañuelos Rivas Jose Alfredo
  */
-
 
 class Platillo {
   private:
