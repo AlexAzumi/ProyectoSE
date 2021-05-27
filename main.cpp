@@ -186,6 +186,7 @@ typedef PlatilloNode *PlatilloNodePointer;
 // Methods: Platillo
 void deleteByID(PlatilloNodePointer *nodeAnchor);
 void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID);
+void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID);
 void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID);
 void printAllElements(PlatilloNodePointer nodeAnchor);
 void searchByID(PlatilloNodePointer *nodeAnchor);
@@ -216,6 +217,11 @@ int main()
       case 2:
       {
         insertElementEnd(&nodeAnchor, &lastID);
+        break;
+      }
+      case 3:
+      {
+        insertElementInPosition(&nodeAnchor, &lastID);
         break;
       }
       case 4:
@@ -635,6 +641,107 @@ void searchByID(PlatilloNodePointer *nodeAnchor)
   {
     cout << endl;
     cout << "No se encontró el elemento con ID: " << id << endl;
+
+    pauseScreen();
+  }
+}
+
+/**
+ * Inserta un platillo en una posición en especifico
+ */
+void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
+{
+  int position;
+  string nombre;
+  float costo_restaurante;
+  float costo_comensal;
+  float tiempo_preparacion;
+  string temporada;
+  string categoria;
+  string preparacion;
+
+  clearConsole();
+
+  // Title
+  cout << endl;
+  cout << "- Ingresar nuevo platillo al frente -" << endl;
+  // Ask data
+  cout << "Posición: ";
+  cin >> position;
+  cin.ignore();
+  cout << "Nombre: ";
+  cin >> nombre;
+  cin.ignore();
+  cout << "Costo al restaurante: ";
+  cin >> costo_restaurante;
+  cin.ignore();
+  cout << "Costo al comensal: ";
+  cin >> costo_comensal;
+  cin.ignore();
+  cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
+  cin >> temporada;
+  cin.ignore();
+  cout << "Tipo (Desayuno, Comida o Cena): ";
+  cin >> categoria;
+  cin.ignore();
+  cout << "Explicación de preparación: ";
+  cin >> preparacion;
+  cin.ignore();
+
+  PlatilloNodePointer previousNode;
+  PlatilloNodePointer currentNode;
+  PlatilloNodePointer newNode;
+
+
+  newNode = new PlatilloNode;
+
+  if (newNode != nullptr)
+  {
+    newNode->data.set_id(*lastID + 1);
+    newNode->data.set_nombre(nombre);
+    newNode->data.set_costo_restaurante(costo_restaurante);
+    newNode->data.set_costo_comensal(costo_comensal);
+    newNode->data.set_tiempo_preparacion(tiempo_preparacion);
+    newNode->data.set_temporada(temporada);
+    newNode->data.set_categoria(categoria);
+    newNode->data.set_preparacion(preparacion);
+
+    currentNode = *nodeAnchor;
+
+    // Search position
+    while (position > 0)
+    {
+      if (currentNode->nextNode == nullptr)
+      {
+        break;
+      }
+
+      previousNode = currentNode;
+      currentNode  = currentNode->nextNode;
+      position--;
+    }
+
+    // Insert in position
+    if (previousNode == nullptr)
+    {
+      newNode->nextNode = *nodeAnchor;
+      *nodeAnchor = newNode;
+    }
+    else
+    {
+      previousNode->nextNode = newNode;
+      newNode->nextNode = currentNode;
+    }
+
+    cout << endl;
+    cout << "El platillo se agregó correctamente" << endl;
+
+    pauseScreen();
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se insertó el elemento, no hay memoria disponible" << endl;
 
     pauseScreen();
   }
