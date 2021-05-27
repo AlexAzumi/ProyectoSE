@@ -183,10 +183,11 @@ struct PlatilloNode
 };
 
 typedef PlatilloNode *PlatilloNodePointer;
-
+// Methods: Platillo
+void insertElementStart(PlatilloNodePointer *nodeAnchor);
 void insertElementEnd(PlatilloNodePointer *nodeAnchor);
 void printAllElements(PlatilloNodePointer nodeAnchor);
-
+// Helpers
 int clearConsole();
 int getMenu();
 void pauseScreen();
@@ -204,6 +205,11 @@ int main()
     cin.ignore();
 
     switch(option) {
+      case 1:
+      {
+        insertElementStart(&nodeAnchor);
+        break;
+      }
       case 2:
       {
         insertElementEnd(&nodeAnchor);
@@ -232,7 +238,6 @@ int main()
     clearConsole();
   }
 }
-
 
 /**
  * Clears the console
@@ -352,6 +357,72 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor)
       previousNode->nextNode = newNode;
       newNode->nextNode = currentNode;
     }
+
+    cout << endl;
+    cout << "El platillo se agregó correctamente" << endl;
+
+    pauseScreen();
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se insertó el elemento, no hay memoria disponible" << endl;
+
+    pauseScreen();
+  }
+}
+
+void insertElementStart(PlatilloNodePointer *nodeAnchor)
+{
+  string nombre;
+  float costo_restaurante;
+  float costo_comensal;
+  float tiempo_preparacion;
+  string temporada;
+  string categoria;
+  string preparacion;
+
+  clearConsole();
+
+  // Title
+  cout << endl;
+  cout << "- Ingresar nuevo platillo al frente -" << endl;
+  // Ask data
+  cout << "Nombre: ";
+  cin >> nombre;
+  cin.ignore();
+  cout << "Costo al restaurante: ";
+  cin >> costo_restaurante;
+  cin.ignore();
+  cout << "Costo al comensal: ";
+  cin >> costo_comensal;
+  cin.ignore();
+  cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
+  cin >> temporada;
+  cin.ignore();
+  cout << "Tipo (Desayuno, Comida o Cena): ";
+  cin >> categoria;
+  cin.ignore();
+  cout << "Explicación de preparación: ";
+  cin >> preparacion;
+  cin.ignore();
+
+  PlatilloNodePointer newNode;
+
+  newNode = new PlatilloNode;
+
+  if (newNode != nullptr)
+  {
+    newNode->data.set_nombre(nombre);
+    newNode->data.set_costo_restaurante(costo_restaurante);
+    newNode->data.set_costo_comensal(costo_comensal);
+    newNode->data.set_tiempo_preparacion(tiempo_preparacion);
+    newNode->data.set_temporada(temporada);
+    newNode->data.set_categoria(categoria);
+    newNode->data.set_preparacion(preparacion);
+
+    newNode->nextNode = *nodeAnchor;
+    *nodeAnchor = newNode;
 
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
