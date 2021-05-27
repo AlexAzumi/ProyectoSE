@@ -1,13 +1,20 @@
 #include <iostream>
 #include <string>
+// Classes
+#include "Platillo.h"
 
 // Declarations
 #define MAX_MENU 50
 #define MAX_ORDER 5
 
 // Needed stuff from std
-using std::string;
+using std::atoi;
+using std::cin;
 using std::cout;
+using std::endl;
+using std::exit;
+using std::string;
+using std::system;
 
 /**
  * - Integrantes del equipo -
@@ -17,103 +24,6 @@ using std::cout;
  * Valdivia Nario Julián André
  * Bañuelos Rivas Jose Alfredo
  */
-
-class Platillo {
-  private:
-    int id;
-    string nombre;
-    float costo_restaurante;
-    float costo_comensal;
-    float tiempo_preparacion;
-    string temporada;
-    string categoria;
-    string preparacion;
-  public:
-    Platillo() {
-      this->id = 0;
-      this->nombre = "";
-      this->costo_comensal = 0.0f;
-      this->tiempo_preparacion = 0.0f;
-      this->temporada = "";
-      this->categoria = "";
-      this->preparacion = "";
-    }
-    Platillo(int id) {
-      this->id = id;
-      this->nombre = "";
-      this->costo_comensal = 0.0f;
-      this->tiempo_preparacion = 0.0f;
-      this->temporada = "";
-      this->categoria = "";
-      this->preparacion = "";
-    }
-    // Setters
-    void set_id(int id)
-    {
-      Platillo::id = id;
-    }
-    void set_nombre(string nombre)
-    {
-      Platillo::nombre = nombre;
-    }
-    void set_costo_restaurante(float costo_restaurante)
-    {
-      Platillo::costo_restaurante = costo_restaurante;
-    }
-    void set_costo_comensal(float costo_comensal)
-    {
-      Platillo::costo_comensal = costo_comensal;
-    }
-    void set_tiempo_preparacion(float tiempo_preparacion)
-    {
-      Platillo::tiempo_preparacion = tiempo_preparacion;
-    }
-    void set_temporada(string temporada)
-    {
-      Platillo::temporada = temporada;
-    }
-    void set_categoria(string categoria)
-    {
-      Platillo::categoria = categoria;
-    }
-    void set_preparacion(string preparacion)
-    {
-      Platillo::preparacion = preparacion;
-    }
-    // Getters
-    int get_id() const
-    {
-      return id;
-    }
-    string get_nombre() const
-    {
-      return nombre;
-    }
-    float get_costo_restaurante() const
-    {
-      return costo_restaurante;
-    }
-    float get_costo_comensal() const
-    {
-      return costo_comensal;
-    }
-    float get_tiempo_preparacion() const
-    {
-      return tiempo_preparacion;
-    }
-    string get_temporada() const
-    {
-      return temporada;
-    }
-    string get_categoria() const
-    {
-      return categoria;
-    }
-    string get_preparacion() const
-    {
-      return preparacion;
-    }
-};
 
 // Clase ingrediente
 class Ingrediente
@@ -266,6 +176,233 @@ class Orden
     }
 };
 
-int main() {
-  cout << "Funciona! :)\n";
+struct PlatilloNode
+{
+  Platillo data;
+  struct PlatilloNode *nextNode;
+};
+
+typedef PlatilloNode *PlatilloNodePointer;
+
+void insertElementEnd(PlatilloNodePointer *nodeAnchor);
+void printAllElements(PlatilloNodePointer nodeAnchor);
+
+int clearConsole();
+int getMenu();
+void pauseScreen();
+
+int main()
+{
+  int option = 0;
+  PlatilloNode *nodeAnchor = nullptr;
+
+  clearConsole();
+
+  while (true)
+  {
+    option = getMenu();
+    cin.ignore();
+
+    switch(option) {
+      case 2:
+      {
+        insertElementEnd(&nodeAnchor);
+        break;
+      }
+      case 8:
+      {
+        printAllElements(nodeAnchor);
+        break;
+      }
+      case 10:
+      {
+        exit(0);
+      }
+      default:
+      {
+        cout << endl;
+        cout << "Opción no válida" << endl;
+
+        pauseScreen();
+
+        break;
+      }
+    }
+
+    clearConsole();
+  }
+}
+
+
+/**
+ * Clears the console
+ */
+int clearConsole()
+{
+  system("clear || cls");
+}
+
+/**
+ * Pauses the execution
+ */
+void pauseScreen()
+{
+	cout << "Presione ENTER para continuar...";
+	cin.get();
+}
+
+/**
+ * Shows and returns the selected menu option
+ */
+int getMenu()
+{
+  char option[99];
+
+  // Show title
+	cout << "Proyecto - Seminario de estructura de datos I" << endl;
+	// Show menu options
+	cout << endl
+			 << "- Opciones -" << endl;
+	cout << "1. Insertar platillo al frente" << endl;
+	cout << "2. Insertar platillo al final" << endl;
+	cout << "3. Insertar platillo por posición" << endl;
+	cout << "4. Eliminar por ID" << endl;
+	cout << "5. Mostrar por ID" << endl;
+	cout << "6. Ordenar por nombre" << endl;
+  cout << "7. Ordenar por tiempo de preparación" << endl;
+  cout << "8. Mostrar todo los platillos" << endl;
+  cout << "9. Editar platillo" << endl;
+  cout << "10. Finalizar programa" << endl;
+	cout << "Opción: ";
+	cin >> option;
+
+  return atoi(option);
+}
+
+/**
+ * Inserts a "platillo" node in the start
+ */
+void insertElementEnd(PlatilloNodePointer *nodeAnchor)
+{
+  string nombre;
+  float costo_restaurante;
+  float costo_comensal;
+  float tiempo_preparacion;
+  string temporada;
+  string categoria;
+  string preparacion;
+
+  clearConsole();
+
+  // Title
+  cout << endl;
+  cout << "- Ingresar nuevo platillo al frente -" << endl;
+  // Ask data
+  cout << "Nombre: ";
+  cin >> nombre;
+  cin.ignore();
+  cout << "Costo al restaurante: ";
+  cin >> costo_restaurante;
+  cin.ignore();
+  cout << "Costo al comensal: ";
+  cin >> costo_comensal;
+  cin.ignore();
+  cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
+  cin >> temporada;
+  cin.ignore();
+  cout << "Tipo (Desayuno, Comida o Cena): ";
+  cin >> categoria;
+  cin.ignore();
+  cout << "Explicación de preparación: ";
+  cin >> preparacion;
+  cin.ignore();
+
+  PlatilloNodePointer previousNode;
+  PlatilloNodePointer currentNode;
+  PlatilloNodePointer newNode;
+
+  newNode = new PlatilloNode;
+
+  if (newNode != nullptr)
+  {
+    newNode->data.set_nombre(nombre);
+    newNode->data.set_costo_restaurante(costo_restaurante);
+    newNode->data.set_costo_comensal(costo_comensal);
+    newNode->data.set_tiempo_preparacion(tiempo_preparacion);
+    newNode->data.set_temporada(temporada);
+    newNode->data.set_categoria(categoria);
+    newNode->data.set_preparacion(preparacion);
+
+    previousNode = nullptr;
+    currentNode = *nodeAnchor;
+
+    while (currentNode != nullptr)
+    {
+      previousNode = currentNode;
+      currentNode = currentNode->nextNode;
+    }
+
+    if (previousNode == nullptr)
+    {
+      newNode->nextNode = *nodeAnchor;
+      *nodeAnchor = newNode;
+    }
+    else
+    {
+      previousNode->nextNode = newNode;
+      newNode->nextNode = currentNode;
+    }
+
+    cout << endl;
+    cout << "El platillo se agregó correctamente" << endl;
+
+    pauseScreen();
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se insertó el elemento, no hay memoria disponible" << endl;
+
+    pauseScreen();
+  }
+}
+
+void printAllElements(PlatilloNodePointer nodeAnchor)
+{
+  PlatilloNodePointer currentNode = nodeAnchor;
+
+  clearConsole();
+
+  // Title
+  cout << endl;
+  cout << "- Mostrar platillos -" << endl;
+
+  if (nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return;
+  }
+
+  cout << endl;
+
+  while (currentNode != nullptr)
+  {
+    cout << "ID: " << currentNode->data.get_id() << endl;
+    cout << "Nombre: " << currentNode->data.get_nombre() << endl;
+    cout << "Costo para restaurante: " << currentNode->data.get_costo_restaurante() << endl;
+    cout << "Costo para comensal: " << currentNode->data.get_costo_comensal() << endl;
+    cout << "Temporada: " << currentNode->data.get_temporada() << endl;
+    cout << "Tipo: " << currentNode->data.get_categoria() << endl;
+    cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+    cout << endl;
+
+    // Go to next node
+    currentNode = currentNode->nextNode;
+  }
+
+  pauseScreen();
 }
