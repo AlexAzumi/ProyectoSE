@@ -184,9 +184,11 @@ struct PlatilloNode
 
 typedef PlatilloNode *PlatilloNodePointer;
 // Methods: Platillo
-void insertElementStart(PlatilloNodePointer *nodeAnchor);
-void insertElementEnd(PlatilloNodePointer *nodeAnchor);
+void deleteByID(PlatilloNodePointer *nodeAnchor);
+void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID);
+void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID);
 void printAllElements(PlatilloNodePointer nodeAnchor);
+void searchByID(PlatilloNodePointer *nodeAnchor);
 // Helpers
 int clearConsole();
 int getMenu();
@@ -195,6 +197,7 @@ void pauseScreen();
 int main()
 {
   int option = 0;
+  int lastID = 0;
   PlatilloNode *nodeAnchor = nullptr;
 
   clearConsole();
@@ -207,12 +210,22 @@ int main()
     switch(option) {
       case 1:
       {
-        insertElementStart(&nodeAnchor);
+        insertElementStart(&nodeAnchor, &lastID);
         break;
       }
       case 2:
       {
-        insertElementEnd(&nodeAnchor);
+        insertElementEnd(&nodeAnchor, &lastID);
+        break;
+      }
+      case 4:
+      {
+        deleteByID(&nodeAnchor);
+        break;
+      }
+      case 5:
+      {
+        searchByID(&nodeAnchor);
         break;
       }
       case 8:
@@ -287,7 +300,7 @@ int getMenu()
 /**
  * Inserts a "platillo" node in the start
  */
-void insertElementEnd(PlatilloNodePointer *nodeAnchor)
+void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID)
 {
   string nombre;
   float costo_restaurante;
@@ -330,6 +343,7 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor)
 
   if (newNode != nullptr)
   {
+    newNode->data.set_id(*lastID + 1);
     newNode->data.set_nombre(nombre);
     newNode->data.set_costo_restaurante(costo_restaurante);
     newNode->data.set_costo_comensal(costo_comensal);
@@ -358,6 +372,8 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor)
       newNode->nextNode = currentNode;
     }
 
+    *lastID = *lastID + 1;
+
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
 
@@ -372,7 +388,10 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor)
   }
 }
 
-void insertElementStart(PlatilloNodePointer *nodeAnchor)
+/**
+ * Inserta un nuevo platillo al inicio de la lista
+ */
+void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID)
 {
   string nombre;
   float costo_restaurante;
@@ -413,6 +432,7 @@ void insertElementStart(PlatilloNodePointer *nodeAnchor)
 
   if (newNode != nullptr)
   {
+    newNode->data.set_id(*lastID + 1);
     newNode->data.set_nombre(nombre);
     newNode->data.set_costo_restaurante(costo_restaurante);
     newNode->data.set_costo_comensal(costo_comensal);
@@ -423,6 +443,8 @@ void insertElementStart(PlatilloNodePointer *nodeAnchor)
 
     newNode->nextNode = *nodeAnchor;
     *nodeAnchor = newNode;
+
+    *lastID = *lastID + 1;
 
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
@@ -438,12 +460,14 @@ void insertElementStart(PlatilloNodePointer *nodeAnchor)
   }
 }
 
+/**
+ * Inserta un platillo al final de la lista
+ */
 void printAllElements(PlatilloNodePointer nodeAnchor)
 {
   PlatilloNodePointer currentNode = nodeAnchor;
 
   clearConsole();
-
   // Title
   cout << endl;
   cout << "- Mostrar platillos -" << endl;
@@ -476,4 +500,142 @@ void printAllElements(PlatilloNodePointer nodeAnchor)
   }
 
   pauseScreen();
+}
+
+/**
+ * Elimina un elemento buscandolo por ID
+ */
+void deleteByID(PlatilloNodePointer *nodeAnchor)
+{
+  int id;
+
+  clearConsole();
+  // Title
+  cout << endl;
+  cout << "- Eliminar platillo por ID -" << endl;
+
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return;
+  }
+
+  cout << "ID del elemento: ";
+  cin >> id;
+  cin.ignore();
+
+  PlatilloNodePointer previousNode;
+  PlatilloNodePointer currentNode;
+  PlatilloNodePointer tempNode;
+
+  currentNode = *nodeAnchor;
+
+  while (currentNode != nullptr)
+  {
+    if (currentNode->data.get_id() == id)
+    {
+      break;
+    }
+
+    previousNode = currentNode;
+    currentNode  = currentNode->nextNode;
+  }
+
+  if (currentNode != nullptr)
+  {
+    if ((*nodeAnchor)->data.get_id() == id)
+    {
+      tempNode = *nodeAnchor;
+      *nodeAnchor = (*nodeAnchor)->nextNode;
+    }
+    else
+    {
+      tempNode = currentNode;
+      previousNode->nextNode = currentNode->nextNode;
+    }
+
+    delete tempNode;
+
+    cout << endl;
+    cout << "El elemento fue eliminado correctamente" << endl;
+
+    pauseScreen();
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se encontró el elemento con ID: " << id << endl;
+
+    pauseScreen();
+  }
+}
+
+/**
+ * Busca un platillo por ID
+ */
+void searchByID(PlatilloNodePointer *nodeAnchor)
+{
+  int id;
+
+  clearConsole();
+  // Title
+  cout << endl;
+  cout << "- Buscar platillo por ID -" << endl;
+
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return;
+  }
+
+  cout << "ID del elemento: ";
+  cin >> id;
+  cin.ignore();
+
+  PlatilloNodePointer previousNode;
+  PlatilloNodePointer currentNode;
+  PlatilloNodePointer tempNode;
+
+  currentNode = *nodeAnchor;
+
+  while (currentNode != nullptr)
+  {
+    if (currentNode->data.get_id() == id)
+    {
+      break;
+    }
+
+    previousNode = currentNode;
+    currentNode  = currentNode->nextNode;
+  }
+
+  if (currentNode != nullptr)
+  {
+    cout << endl;
+    cout << "ID: " << currentNode->data.get_id() << endl;
+    cout << "Nombre: " << currentNode->data.get_nombre() << endl;
+    cout << "Costo para restaurante: " << currentNode->data.get_costo_restaurante() << endl;
+    cout << "Costo para comensal: " << currentNode->data.get_costo_comensal() << endl;
+    cout << "Temporada: " << currentNode->data.get_temporada() << endl;
+    cout << "Tipo: " << currentNode->data.get_categoria() << endl;
+    cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+    cout << endl;
+
+    pauseScreen();
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se encontró el elemento con ID: " << id << endl;
+
+    pauseScreen();
+  }
 }
