@@ -8,10 +8,6 @@
 // Struct nodes
 #include "PlatilloNode.h"
 
-// Declarations
-#define MAX_MENU 50
-#define MAX_ORDER 5
-
 // Needed stuff from std
 using std::atoi;
 using std::cin;
