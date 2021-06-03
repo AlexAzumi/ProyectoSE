@@ -6,6 +6,9 @@ Orden::Orden(int id, int table)
 {
   this->id = id;
   this->table = table;
+  this->total = 0.0f;
+  this->count = 0;
+  this->platilloAnchor = nullptr;
 }
 
 void Orden::set_id(int id)
