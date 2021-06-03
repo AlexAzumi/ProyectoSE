@@ -4,6 +4,7 @@
 #include "Platillo.h"
 #include "Orden.h"
 #include "Menu.h"
+#include "Ingrediente.h"
 // Struct nodes
 #include "PlatilloNode.h"
 
@@ -28,60 +29,6 @@ using std::system;
  * Valdivia Nario Julián André
  * Bañuelos Rivas Jose Alfredo
  */
-
-// Clase ingrediente
-class Ingrediente
-{
-private:
-  int id;
-  string nombreIngrediente;
-  int cantidad;
-  string medida;
-
-  Ingrediente()
-  {
-    id = 0;
-    nombreIngrediente = "-";
-    cantidad = 0;
-    medida = "-";
-  }
-
-public:
-  friend class Platillo;
-
-  void setId(const int &valor)
-  {
-    id = valor;
-  }
-  int getId() const
-  {
-    return id;
-  }
-  void setNombreIngrediente(const string &valor)
-  {
-    nombreIngrediente = valor;
-  }
-  string getNombreIngrediente() const
-  {
-    return nombreIngrediente;
-  }
-  void setCantidad(const int &valor)
-  {
-    cantidad = valor;
-  }
-  int getCantidad() const
-  {
-    return cantidad;
-  }
-  void setMedida(const string &valor)
-  {
-    medida = valor;
-  }
-  string getMedida() const
-  {
-    return medida;
-  }
-};
 
 typedef PlatilloNode *PlatilloNodePointer;
 // Methods: Platillo
