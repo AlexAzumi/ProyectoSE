@@ -5,9 +5,9 @@
 
 struct PlatilloNode
 {
-    Platillo data;
-    PlatilloNode *previousNode;
-    PlatilloNode *nextNode;
+  Platillo data;
+  PlatilloNode *previousNode;
+  PlatilloNode *nextNode;
 };
 
 #endif
