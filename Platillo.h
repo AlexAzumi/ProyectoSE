@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 
 #ifndef PLATILLO_H
 #define PLATILLO_H
