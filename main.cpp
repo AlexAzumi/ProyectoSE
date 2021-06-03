@@ -3,6 +3,7 @@
 // Classes
 #include "Platillo.h"
 #include "Orden.h"
+#include "Menu.h"
 // Struct nodes
 #include "PlatilloNode.h"
 
@@ -79,40 +80,6 @@ public:
   string getMedida() const
   {
     return medida;
-  }
-};
-
-// Clase Menu
-class Menu
-{
-private:
-  Platillo platillos[MAX_MENU];
-  string temporada;
-
-public:
-  Menu() {}
-
-  ~Menu() {}
-
-  // Ingresar los platillos de temporada
-  void setPlatillos(Platillo platillos[MAX_MENU])
-  {
-    for (int i = 0; i < MAX_MENU; i++)
-    {
-      this->platillos[i] = platillos[i];
-    }
-  }
-
-  // Ingresar la temporada del Menu
-  void setTemporadaMenu(string nvaTemp)
-  {
-    this->temporada = nvaTemp;
-  }
-
-  // Mostrar temporada del menu
-  string getTemporada()
-  {
-    return this->temporada;
   }
 };
 

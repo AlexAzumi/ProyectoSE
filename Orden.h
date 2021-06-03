@@ -1,5 +1,3 @@
-#include <iostream>
-// Struct nodes
 #include "PlatilloNode.h"
 
 #ifndef ORDEN_H
