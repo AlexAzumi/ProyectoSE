@@ -2,6 +2,7 @@
 #include <string>
 // Classes
 #include "Platillo.h"
+#include "Orden.h"
 // Struct nodes
 #include "PlatilloNode.h"
 
@@ -30,142 +31,89 @@ using std::system;
 // Clase ingrediente
 class Ingrediente
 {
-  private:
-    int id;
-    string nombreIngrediente;
-    int cantidad;
-    string medida;
+private:
+  int id;
+  string nombreIngrediente;
+  int cantidad;
+  string medida;
 
-    Ingrediente()
-    {
-      id=0;
-      nombreIngrediente="-";
-      cantidad=0;
-      medida="-";
-    }
-  public:
+  Ingrediente()
+  {
+    id = 0;
+    nombreIngrediente = "-";
+    cantidad = 0;
+    medida = "-";
+  }
 
+public:
   friend class Platillo;
 
-  void setId(const int& valor)
+  void setId(const int &valor)
   {
     id = valor;
   }
-  int getId()const
+  int getId() const
   {
     return id;
   }
-  void setNombreIngrediente(const string& valor)
+  void setNombreIngrediente(const string &valor)
   {
-    nombreIngrediente=valor;
+    nombreIngrediente = valor;
   }
-  string getNombreIngrediente()const
+  string getNombreIngrediente() const
   {
     return nombreIngrediente;
   }
-  void setCantidad(const int& valor)
+  void setCantidad(const int &valor)
   {
-    cantidad=valor;
+    cantidad = valor;
   }
-  int getCantidad()const
+  int getCantidad() const
   {
     return cantidad;
   }
-  void setMedida(const string& valor)
+  void setMedida(const string &valor)
   {
-    medida=valor;
+    medida = valor;
   }
-  string getMedida()const
+  string getMedida() const
   {
     return medida;
   }
-  
 };
 
 // Clase Menu
 class Menu
 {
-  private:
-    Platillo platillos[MAX_MENU];
-    string temporada;
+private:
+  Platillo platillos[MAX_MENU];
+  string temporada;
 
-  public:
-    Menu(){ }
-    
-    ~Menu() { }
-    
-    // Ingresar los platillos de temporada
-    void setPlatillos(Platillo platillos[MAX_MENU])
-    {
-      for (int i = 0; i < MAX_MENU; i++)
-      {
-        this->platillos[i] = platillos[i];
-      }
-    }
+public:
+  Menu() {}
 
-    // Ingresar la temporada del Menu
-    void setTemporadaMenu(string nvaTemp)
-    {
-      this->temporada = nvaTemp;
-    }
+  ~Menu() {}
 
-    // Mostrar temporada del menu
-    string getTemporada()
+  // Ingresar los platillos de temporada
+  void setPlatillos(Platillo platillos[MAX_MENU])
+  {
+    for (int i = 0; i < MAX_MENU; i++)
     {
-      return this->temporada;
+      this->platillos[i] = platillos[i];
     }
+  }
 
-};
+  // Ingresar la temporada del Menu
+  void setTemporadaMenu(string nvaTemp)
+  {
+    this->temporada = nvaTemp;
+  }
 
-// Clase Orden
-class Orden
-{
-  private:
-    int id;
-    int mesa;
-    Platillo platillo[5];
-    float total;
-    int contP = 0;
-  public:
-    Orden(int id,int mesa,Platillo platillos[MAX_ORDER])
-    {
-        this->id = id;
-        this->mesa = mesa;
-        // Guardar todos los platillos
-        for (int i = 0; i < MAX_ORDER; i++)
-        {
-          this->platillo[i] = platillos[i];
-        }
-        this->set_total();
-    }
-    void set_id(int id)
-    {
-      this->id=id;
-    }
-    void set_platillo(Platillo platillo)
-    {
-      this->platillo[contP]=  platillo;
-      contP++;
-    }
-    int get_id()
-    {
-      return id;
-    }
-    Platillo get_platillo(int pos)
-    {
-      return platillo[pos];
-    }
-    float get_total()
-    {
-        return this->total;
-    }
-    void set_total()
-    {
-      for (int i = 0; i < MAX_ORDER; i++)
-      {
-        this->total += platillo[i].get_costo_comensal();
-      }
-    }
+  // Mostrar temporada del menu
+  string getTemporada()
+  {
+    return this->temporada;
+  }
 };
 
 typedef PlatilloNode *PlatilloNodePointer;
@@ -195,55 +143,56 @@ int main()
     option = getMenu();
     cin.ignore();
 
-    switch(option) {
-      case 1:
-      {
-        insertElementStart(&nodeAnchor, &lastID);
-        break;
-      }
-      case 2:
-      {
-        insertElementEnd(&nodeAnchor, &lastID);
-        break;
-      }
-      case 3:
-      {
-        insertElementInPosition(&nodeAnchor, &lastID);
-        break;
-      }
-      case 4:
-      {
-        deleteByID(&nodeAnchor);
-        break;
-      }
-      case 5:
-      {
-        searchByID(&nodeAnchor);
-        break;
-      }
-      case 8:
-      {
-        printAllElements(nodeAnchor);
-        break;
-      }
-      case 9:
-      {
-        editFood(&nodeAnchor);
-        break;
-      }
-      case 10:
-      {
-        exit(0);
-      }
-      default:
-      {
-        cout << endl;
-        cout << "Opción no válida" << endl;
+    switch (option)
+    {
+    case 1:
+    {
+      insertElementStart(&nodeAnchor, &lastID);
+      break;
+    }
+    case 2:
+    {
+      insertElementEnd(&nodeAnchor, &lastID);
+      break;
+    }
+    case 3:
+    {
+      insertElementInPosition(&nodeAnchor, &lastID);
+      break;
+    }
+    case 4:
+    {
+      deleteByID(&nodeAnchor);
+      break;
+    }
+    case 5:
+    {
+      searchByID(&nodeAnchor);
+      break;
+    }
+    case 8:
+    {
+      printAllElements(nodeAnchor);
+      break;
+    }
+    case 9:
+    {
+      editFood(&nodeAnchor);
+      break;
+    }
+    case 10:
+    {
+      exit(0);
+    }
+    default:
+    {
+      cout << endl;
+      cout << "Opción no válida" << endl;
 
-        pauseScreen();
+      pauseScreen();
 
-        break;
-      }
+      break;
+    }
     }
 
     clearConsole();
@@ -263,8 +212,8 @@ void clearConsole()
  */
 void pauseScreen()
 {
-	cout << "Presione ENTER para continuar...";
-	cin.get();
+  cout << "Presione ENTER para continuar...";
+  cin.get();
 }
 
 /**
@@ -275,22 +224,22 @@ int getMenu()
   char option[99];
 
   // Show title
-	cout << "Proyecto - Seminario de estructura de datos I" << endl;
-	// Show menu options
-	cout << endl
-			 << "- Opciones -" << endl;
-	cout << "1. Insertar platillo al frente" << endl;
-	cout << "2. Insertar platillo al final" << endl;
-	cout << "3. Insertar platillo por posición" << endl;
-	cout << "4. Eliminar por ID" << endl;
-	cout << "5. Mostrar por ID" << endl;
-	cout << "6. Ordenar por nombre" << endl;
+  cout << "Proyecto - Seminario de estructura de datos I" << endl;
+  // Show menu options
+  cout << endl
+       << "- Opciones -" << endl;
+  cout << "1. Insertar platillo al frente" << endl;
+  cout << "2. Insertar platillo al final" << endl;
+  cout << "3. Insertar platillo por posición" << endl;
+  cout << "4. Eliminar por ID" << endl;
+  cout << "5. Mostrar por ID" << endl;
+  cout << "6. Ordenar por nombre" << endl;
   cout << "7. Ordenar por tiempo de preparación" << endl;
   cout << "8. Mostrar todo los platillos" << endl;
   cout << "9. Editar platillo" << endl;
   cout << "10. Finalizar programa" << endl;
-	cout << "Opción: ";
-	cin >> option;
+  cout << "Opción: ";
+  cin >> option;
 
   return atoi(option);
 }
@@ -540,7 +489,7 @@ void deleteByID(PlatilloNodePointer *nodeAnchor)
     }
 
     previousNode = currentNode;
-    currentNode  = currentNode->nextNode;
+    currentNode = currentNode->nextNode;
   }
 
   if (currentNode != nullptr)
@@ -612,7 +561,7 @@ void searchByID(PlatilloNodePointer *nodeAnchor)
     }
 
     previousNode = currentNode;
-    currentNode  = currentNode->nextNode;
+    currentNode = currentNode->nextNode;
   }
 
   if (currentNode != nullptr)
@@ -643,161 +592,161 @@ void searchByID(PlatilloNodePointer *nodeAnchor)
  */
 void editFood(PlatilloNodePointer *nodeAnchor)
 {
-    int id;
-    int opc;
-    char op;
+  int id;
+  int opc;
+  char op;
 
-    int newId;
-    string newName;
-    float newCostRest;
-    float newCostClient;
-    float newPrepTime;
-    string newSeason;
-    string newCategory;
-    string newPreparation;
+  int newId;
+  string newName;
+  float newCostRest;
+  float newCostClient;
+  float newPrepTime;
+  string newSeason;
+  string newCategory;
+  string newPreparation;
 
-    clearConsole();
-    // Title
+  clearConsole();
+  // Title
+  cout << endl;
+  cout << "- Buscar platillo por ID -" << endl;
+
+  if (*nodeAnchor == nullptr)
+  {
     cout << endl;
-    cout << "- Buscar platillo por ID -" << endl;
+    cout << "La lista está vacía" << endl;
 
-    if (*nodeAnchor == nullptr)
+    pauseScreen();
+
+    return;
+  }
+
+  cout << "ID del elemento: ";
+  cin >> id;
+  cin.ignore();
+
+  PlatilloNodePointer previousNode;
+  PlatilloNodePointer currentNode;
+  PlatilloNodePointer tempNode;
+
+  currentNode = *nodeAnchor;
+
+  while (currentNode != nullptr)
+  {
+    if (currentNode->data.get_id() == id)
     {
-        cout << endl;
-        cout << "La lista está vacía" << endl;
-
-        pauseScreen();
-
-        return;
+      break;
     }
 
-    cout << "ID del elemento: ";
-    cin >> id;
-    cin.ignore();
+    previousNode = currentNode;
+    currentNode = currentNode->nextNode;
+  }
 
-    PlatilloNodePointer previousNode;
-    PlatilloNodePointer currentNode;
-    PlatilloNodePointer tempNode;
-
-    currentNode = *nodeAnchor;
-
-    while (currentNode != nullptr)
+  if (currentNode != nullptr)
+  {
+    do
     {
-        if (currentNode->data.get_id() == id)
-        {
-            break;
-        }
+      clearConsole();
+      cout << endl;
+      cout << "Elige el campo del platillo que deseas editar" << endl;
+      cout << "1. ID" << endl
+           << "2. Nombre" << endl
+           << "3. Costo para el restaurante" << endl
+           << "4. Costo para el comensal" << endl
+           << "5. Temporada" << endl
+           << "6. Tipo" << endl
+           << "7. Preparacion" << endl
+           << "8. Tiempo de preparacion" << endl
+           << endl;
+      cin >> opc;
+      cin.ignore();
+      switch (opc)
+      {
+      case 1:
+        clearConsole();
+        cout << "Ingresa el nuevo ID del platillo" << endl;
+        cin >> newId;
+        currentNode->data.set_id(newId);
+        cout << "ID modificado exitosamente" << endl;
+        break;
 
-        previousNode = currentNode;
-        currentNode = currentNode->nextNode;
-    }
+      case 2:
+        clearConsole();
+        cout << "Ingresa el nuevo nombre del platillo" << endl;
+        std::getline(cin, newName);
+        currentNode->data.set_nombre(newName);
+        cout << "Nombre del platillo modificado exitosamente" << endl;
+        break;
 
-    if (currentNode != nullptr)
-    {
-        do
-        {
-            clearConsole();
-            cout << endl;
-            cout << "Elige el campo del platillo que deseas editar" << endl;
-            cout << "1. ID" << endl
-                 << "2. Nombre" << endl
-                 << "3. Costo para el restaurante" << endl
-                 << "4. Costo para el comensal" << endl
-                 << "5. Temporada" << endl
-                 << "6. Tipo" << endl
-                 << "7. Preparacion" << endl
-                 << "8. Tiempo de preparacion" << endl
-                 << endl;
-            cin >> opc;
-            cin.ignore();
-            switch (opc)
-            {
-            case 1:
-                clearConsole();
-                cout << "Ingresa el nuevo ID del platillo" << endl;
-                cin >> newId;
-                currentNode->data.set_id(newId);
-                cout << "ID modificado exitosamente" << endl;
-                break;
+      case 3:
+        clearConsole();
+        cout << "Ingresa el nuevo costo del platillo para el restaurante" << endl;
+        cin >> newCostRest;
+        currentNode->data.set_costo_restaurante(newCostRest);
+        cout << "Costo del platillo para el restaurante modificado exitosamente" << endl;
+        break;
 
-            case 2:
-                clearConsole();
-                cout << "Ingresa el nuevo nombre del platillo" << endl;
-                std::getline(cin, newName);
-                currentNode->data.set_nombre(newName);
-                cout << "Nombre del platillo modificado exitosamente" << endl;
-                break;
+      case 4:
+        clearConsole();
+        cout << "Ingresa el nuevo costo del platillo para el comensal" << endl;
+        cin >> newCostClient;
+        currentNode->data.set_costo_comensal(newCostClient);
+        cout << "Costo del platillo para el comensal modificado exitosamente" << endl;
+        break;
 
-            case 3:
-                clearConsole();
-                cout << "Ingresa el nuevo costo del platillo para el restaurante" << endl;
-                cin >> newCostRest;
-                currentNode->data.set_costo_restaurante(newCostRest);
-                cout << "Costo del platillo para el restaurante modificado exitosamente" << endl;
-                break;
+      case 5:
+        clearConsole();
+        cout << "Ingresa la nueva temporada del platillo" << endl;
+        std::getline(cin, newSeason);
+        currentNode->data.set_temporada(newSeason);
+        cout << "Temporada del platillo modificada exitosamente" << endl;
+        break;
 
-            case 4:
-                clearConsole();
-                cout << "Ingresa el nuevo costo del platillo para el comensal" << endl;
-                cin >> newCostClient;
-                currentNode->data.set_costo_comensal(newCostClient);
-                cout << "Costo del platillo para el comensal modificado exitosamente" << endl;
-                break;
+      case 6:
+        clearConsole();
+        cout << "Ingresa la nueva categoria del platillo" << endl;
+        std::getline(cin, newCategory);
+        currentNode->data.set_categoria(newCategory);
+        cout << "Categoria del platillo modificada exitosamente" << endl;
+        break;
 
-            case 5:
-                clearConsole();
-                cout << "Ingresa la nueva temporada del platillo" << endl;
-                std::getline(cin, newSeason);
-                currentNode->data.set_temporada(newSeason);
-                cout << "Temporada del platillo modificada exitosamente" << endl;
-                break;
+      case 7:
+        clearConsole();
+        cout << "Ingresa la nueva preparacion del platillo" << endl;
+        std::getline(cin, newPreparation);
+        currentNode->data.set_preparacion(newPreparation);
+        cout << "Preparacion del platillo modificada exitosamente" << endl;
+        break;
 
-            case 6:
-                clearConsole();
-                cout << "Ingresa la nueva categoria del platillo" << endl;
-                std::getline(cin, newCategory);
-                currentNode->data.set_categoria(newCategory);
-                cout << "Categoria del platillo modificada exitosamente" << endl;
-                break;
+      case 8:
+        clearConsole();
+        cout << "Ingresa el nuevo tiempo de preparacion del platillo" << endl;
+        cin >> newPrepTime;
+        currentNode->data.set_tiempo_preparacion(newPrepTime);
+        cout << "Tiempo de preparacion del platillo modificado exitosamente" << endl;
+        break;
 
-            case 7:
-                clearConsole();
-                cout << "Ingresa la nueva preparacion del platillo" << endl;
-                std::getline(cin, newPreparation);
-                currentNode->data.set_preparacion(newPreparation);
-                cout << "Preparacion del platillo modificada exitosamente" << endl;
-                break;
+      default:
+        clearConsole();
+        cout << "Opcion desconocida" << endl;
+        break;
+      }
 
-            case 8:
-                clearConsole();
-                cout << "Ingresa el nuevo tiempo de preparacion del platillo" << endl;
-                cin >> newPrepTime;
-                currentNode->data.set_tiempo_preparacion(newPrepTime);
-                cout << "Tiempo de preparacion del platillo modificado exitosamente" << endl;
-                break;
+      pauseScreen();
 
-            default:
-                clearConsole();
-                cout << "Opcion desconocida" << endl;
-                break;
-            }
+      cout << "Desea editar un campo mas?" << endl;
+      cout << "Si(s) | No(n)" << endl;
+      cin >> op;
+      cin.ignore();
 
-            pauseScreen();
+    } while (op == 's');
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se encontró el elemento con ID: " << id << endl;
 
-            cout << "Desea editar un campo mas?" << endl;
-            cout << "Si(s) | No(n)" << endl;
-            cin >> op;
-            cin.ignore();
-
-        } while (op == 's');
-    }
-    else
-    {
-        cout << endl;
-        cout << "No se encontró el elemento con ID: " << id << endl;
-
-        pauseScreen();
-    }
+    pauseScreen();
+  }
 }
 
 /**
@@ -819,6 +768,7 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
   // Title
   cout << endl;
   cout << "- Ingresar nuevo platillo al frente -" << endl;
+  cout << endl;
   // Ask data
   cout << "Posición: ";
   cin >> position;
@@ -846,7 +796,6 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
   PlatilloNodePointer currentNode;
   PlatilloNodePointer newNode;
 
-
   newNode = new PlatilloNode;
 
   if (newNode != nullptr)
@@ -871,7 +820,7 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
       }
 
       previousNode = currentNode;
-      currentNode  = currentNode->nextNode;
+      currentNode = currentNode->nextNode;
       position--;
     }
 
