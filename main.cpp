@@ -171,15 +171,15 @@ class Orden
 typedef PlatilloNode *PlatilloNodePointer;
 // Methods: Platillo
 void deleteByID(PlatilloNodePointer *nodeAnchor);
+void editFood(PlatilloNodePointer *nodeAnchor);
 void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID);
 void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID);
 void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID);
 void printAllElements(PlatilloNodePointer nodeAnchor);
 void searchByID(PlatilloNodePointer *nodeAnchor);
-void editFood(PlatilloNodePointer *nodeAnchor);
 // Helpers
-int clearConsole();
 int getMenu();
+void clearConsole();
 void pauseScreen();
 
 int main()
@@ -253,7 +253,7 @@ int main()
 /**
  * Clears the console
  */
-int clearConsole()
+void clearConsole()
 {
   system("clear || cls");
 }
