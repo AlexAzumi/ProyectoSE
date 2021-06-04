@@ -1,4 +1,4 @@
-#include "PlatilloNode.h"
+#include "AlimentoNode.h"
 
 #ifndef ORDEN_H
 #define ORDEN_H
@@ -16,14 +16,14 @@ public:
   int get_count() const;
   int get_id() const;
   int get_table() const;
-  PlatilloNode *get_platillo_anchor() const;
+  AlimentoNode *get_platillo_anchor() const;
   // More
   void calculate_and_assign_total();
 
 private:
   int id;
   int table;
-  PlatilloNode *platilloAnchor;
+  AlimentoNode *platilloAnchor;
   float total;
   int count;
 };

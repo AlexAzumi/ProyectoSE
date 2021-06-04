@@ -1,5 +1,5 @@
 #include "Orden.h"
-#include "Platillo.h"
+#include "Alimento.h"
 
 Orden::Orden(int id, int table)
 {
@@ -40,7 +40,7 @@ float Orden::get_total() const
   return this->total;
 }
 
-PlatilloNode *Orden::get_platillo_anchor() const
+AlimentoNode *Orden::get_platillo_anchor() const
 {
   return this->platilloAnchor;
 }
@@ -48,7 +48,7 @@ PlatilloNode *Orden::get_platillo_anchor() const
 void Orden::calculate_and_assign_total()
 {
   float tempTotal = 0.0f;
-  PlatilloNode *currentNode;
+  AlimentoNode *currentNode;
 
   currentNode = this->platilloAnchor;
 

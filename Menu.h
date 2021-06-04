@@ -1,5 +1,5 @@
 #include <iostream>
-#include "PlatilloNode.h"
+#include "AlimentoNode.h"
 
 using std::string;
 
@@ -9,16 +9,16 @@ using std::string;
 class Menu
 {
 private:
-  PlatilloNode *platilloAnchor;
+  AlimentoNode *platilloAnchor;
   string season;
 
 public:
-  Menu(PlatilloNode **platilloAnchor, string season);
+  Menu(AlimentoNode **platilloAnchor, string season);
   // Setters
-  void set_platillo_anchor(PlatilloNode **platilloAnchor);
+  void set_platillo_anchor(AlimentoNode **platilloAnchor);
   void set_season(string season);
   // Getters
-  PlatilloNode *get_platillo_anchor() const;
+  AlimentoNode *get_platillo_anchor() const;
   string get_season() const;
 };
 

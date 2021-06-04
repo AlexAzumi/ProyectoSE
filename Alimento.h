@@ -1,14 +1,14 @@
 #include <iostream>
 
-#ifndef PLATILLO_H
-#define PLATILLO_H
+#ifndef ALIMENTO_H
+#define ALIMENTO_H
 
 using std::string;
 
-class Platillo
+class Alimento
 {
   public:
-    Platillo();
+    Alimento();
     // Setters
     void set_id(int nuevo_id);
     void set_nombre(string nuevo_nombre);
@@ -18,6 +18,7 @@ class Platillo
     void set_temporada(string nueva_temporada);
     void set_categoria(string nueva_categoria);
     void set_preparacion(string nueva_preparacion);
+    void set_tipo(string tipo);
     // Getters
     int get_id() const;
     string get_nombre() const;
@@ -27,9 +28,7 @@ class Platillo
     string get_temporada() const;
     string get_categoria() const;
     string get_preparacion() const;
-    // Otros métodos
-    void agregar_platillo(Platillo *platillo);
-    void imprimir_platillo();
+    string get_tipo() const;
 
   private:
     int id;
@@ -40,6 +39,7 @@ class Platillo
     string temporada;
     string categoria;
     string preparacion;
+    string tipo;
 };
 
-#endif // PLATILLO_H
+#endif

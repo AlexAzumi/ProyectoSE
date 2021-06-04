@@ -1,16 +1,16 @@
 #include <iostream>
 #include "Menu.h"
-#include "PlatilloNode.h"
+#include "AlimentoNode.h"
 
 using std::string;
 
-Menu::Menu(PlatilloNode **platilloAnchor, string season)
+Menu::Menu(AlimentoNode **platilloAnchor, string season)
 {
   this->platilloAnchor = *platilloAnchor;
   this->season = season;
 }
 
-void Menu::set_platillo_anchor(PlatilloNode **platilloAnchor)
+void Menu::set_platillo_anchor(AlimentoNode **platilloAnchor)
 {
   this->platilloAnchor = *platilloAnchor;
 }
@@ -20,7 +20,7 @@ void Menu::set_season(string season)
   this->season = season;
 }
 
-PlatilloNode *Menu::get_platillo_anchor() const
+AlimentoNode *Menu::get_platillo_anchor() const
 {
   return this->platilloAnchor;
 }

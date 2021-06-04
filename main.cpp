@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 // Classes
-#include "Platillo.h"
+#include "Alimento.h"
 #include "Orden.h"
 #include "Menu.h"
 #include "Ingrediente.h"
 // Struct nodes
-#include "PlatilloNode.h"
+#include "AlimentoNode.h"
 
 // Needed stuff from std
 using std::atoi;
@@ -26,18 +26,18 @@ using std::system;
  * Bañuelos Rivas Jose Alfredo
  */
 
-typedef PlatilloNode *PlatilloNodePointer;
-// Methods: Platillo
-void deleteByID(PlatilloNodePointer *nodeAnchor);
-void editFood(PlatilloNodePointer *nodeAnchor);
-void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID);
-void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID);
-void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID);
-void printAllElements(PlatilloNodePointer nodeAnchor);
-void searchByID(PlatilloNodePointer *nodeAnchor);
+typedef AlimentoNode *AlimentoNodePointer;
+// Methods: Alimento
+void deleteByID(AlimentoNodePointer *nodeAnchor);
+void editFood(AlimentoNodePointer *nodeAnchor);
+void insertElementEnd(AlimentoNodePointer *nodeAnchor, int *lastID);
+void insertElementInPosition(AlimentoNodePointer *nodeAnchor, int *lastID);
+void insertElementStart(AlimentoNodePointer *nodeAnchor, int *lastID);
+void printAllElements(AlimentoNodePointer nodeAnchor);
+void searchByID(AlimentoNodePointer *nodeAnchor);
 //Ordenamientos en la Lista Simp. Ligada
-void bubbleSortByName(PlatilloNodePointer *nodeAnchor);
-void bubbleSortByCTime(PlatilloNodePointer *nodeAnchor);
+void bubbleSortByName(AlimentoNodePointer *nodeAnchor);
+void bubbleSortByCTime(AlimentoNodePointer *nodeAnchor);
 // Helpers
 int getMenu();
 void clearConsole();
@@ -47,7 +47,7 @@ int main()
 {
   int option = 0;
   int lastID = 0;
-  PlatilloNode *nodeAnchor = nullptr;
+  AlimentoNode *nodeAnchor = nullptr;
 
   clearConsole();
 
@@ -172,7 +172,7 @@ int getMenu()
 /**
  * Inserts a "platillo" node in the start
  */
-void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID)
+void insertElementEnd(AlimentoNodePointer *nodeAnchor, int *lastID)
 {
   string nombre;
   float costo_restaurante;
@@ -207,11 +207,11 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID)
   cin >> preparacion;
   cin.ignore();
 
-  PlatilloNodePointer previousNode;
-  PlatilloNodePointer currentNode;
-  PlatilloNodePointer newNode;
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer newNode;
 
-  newNode = new PlatilloNode;
+  newNode = new AlimentoNode;
 
   if (newNode != nullptr)
   {
@@ -263,7 +263,7 @@ void insertElementEnd(PlatilloNodePointer *nodeAnchor, int *lastID)
 /**
  * Inserta un nuevo platillo al inicio de la lista
  */
-void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID)
+void insertElementStart(AlimentoNodePointer *nodeAnchor, int *lastID)
 {
   string nombre;
   float costo_restaurante;
@@ -298,9 +298,9 @@ void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID)
   cin >> preparacion;
   cin.ignore();
 
-  PlatilloNodePointer newNode;
+  AlimentoNodePointer newNode;
 
-  newNode = new PlatilloNode;
+  newNode = new AlimentoNode;
 
   if (newNode != nullptr)
   {
@@ -335,9 +335,9 @@ void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID)
 /**
  * Inserta un platillo al final de la lista
  */
-void printAllElements(PlatilloNodePointer nodeAnchor)
+void printAllElements(AlimentoNodePointer nodeAnchor)
 {
-  PlatilloNodePointer currentNode = nodeAnchor;
+  AlimentoNodePointer currentNode = nodeAnchor;
 
   clearConsole();
   // Title
@@ -377,7 +377,7 @@ void printAllElements(PlatilloNodePointer nodeAnchor)
 /**
  * Elimina un elemento buscandolo por ID
  */
-void deleteByID(PlatilloNodePointer *nodeAnchor)
+void deleteByID(AlimentoNodePointer *nodeAnchor)
 {
   int id;
 
@@ -400,9 +400,9 @@ void deleteByID(PlatilloNodePointer *nodeAnchor)
   cin >> id;
   cin.ignore();
 
-  PlatilloNodePointer previousNode;
-  PlatilloNodePointer currentNode;
-  PlatilloNodePointer tempNode;
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer tempNode;
 
   currentNode = *nodeAnchor;
 
@@ -449,7 +449,7 @@ void deleteByID(PlatilloNodePointer *nodeAnchor)
 /**
  * Busca un platillo por ID
  */
-void searchByID(PlatilloNodePointer *nodeAnchor)
+void searchByID(AlimentoNodePointer *nodeAnchor)
 {
   int id;
 
@@ -472,9 +472,9 @@ void searchByID(PlatilloNodePointer *nodeAnchor)
   cin >> id;
   cin.ignore();
 
-  PlatilloNodePointer previousNode;
-  PlatilloNodePointer currentNode;
-  PlatilloNodePointer tempNode;
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer tempNode;
 
   currentNode = *nodeAnchor;
 
@@ -515,7 +515,7 @@ void searchByID(PlatilloNodePointer *nodeAnchor)
 /**
  * Edita un platillo
  */
-void editFood(PlatilloNodePointer *nodeAnchor)
+void editFood(AlimentoNodePointer *nodeAnchor)
 {
   int id;
   int opc;
@@ -549,9 +549,9 @@ void editFood(PlatilloNodePointer *nodeAnchor)
   cin >> id;
   cin.ignore();
 
-  PlatilloNodePointer previousNode;
-  PlatilloNodePointer currentNode;
-  PlatilloNodePointer tempNode;
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer tempNode;
 
   currentNode = *nodeAnchor;
 
@@ -677,7 +677,7 @@ void editFood(PlatilloNodePointer *nodeAnchor)
 /**
  * Inserta un platillo en una posición en especifico
  */
-void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
+void insertElementInPosition(AlimentoNodePointer *nodeAnchor, int *lastID)
 {
   int position;
   string nombre;
@@ -717,11 +717,11 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
   cin >> preparacion;
   cin.ignore();
 
-  PlatilloNodePointer previousNode;
-  PlatilloNodePointer currentNode;
-  PlatilloNodePointer newNode;
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer newNode;
 
-  newNode = new PlatilloNode;
+  newNode = new AlimentoNode;
 
   if (newNode != nullptr)
   {
@@ -778,11 +778,11 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
 /*
  * Ordenamiento burbuja por nombre
 */
-void bubbleSortByName(PlatilloNodePointer *nodeAnchor)
+void bubbleSortByName(AlimentoNodePointer *nodeAnchor)
 {
-    PlatilloNodePointer puntero = *nodeAnchor;
-    PlatilloNodePointer aux = nullptr;
-    Platillo dato;
+    AlimentoNodePointer puntero = *nodeAnchor;
+    AlimentoNodePointer aux = nullptr;
+    Alimento dato;
 
     while (puntero->nextNode != nullptr)
     {
@@ -808,11 +808,11 @@ void bubbleSortByName(PlatilloNodePointer *nodeAnchor)
 /*
  * Ordenamiento burbuja por tiempo de preparacion
 */
-void bubbleSortByCTime(PlatilloNodePointer *nodeAnchor)
+void bubbleSortByCTime(AlimentoNode **nodeAnchor)
 {
-    PlatilloNodePointer puntero = *nodeAnchor;
-    PlatilloNodePointer aux = nullptr;
-    Platillo dato;
+    AlimentoNode *puntero = *nodeAnchor;
+    AlimentoNode *aux = nullptr;
+    Alimento dato;
 
     while (puntero->nextNode != nullptr)
     {

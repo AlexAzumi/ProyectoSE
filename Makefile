@@ -1,16 +1,16 @@
-app: main.o Platillo.o Orden.o Menu.o Ingrediente.o
-	g++ -o app main.o Platillo.o Orden.o
+app: main.o Alimento.o Orden.o Menu.o Ingrediente.o
+	g++ -o app main.o Alimento.o Orden.o
 
-main.o: main.cpp Platillo.h PlatilloNode.h
+main.o: main.cpp Alimento.h AlimentoNode.h
 	g++ -c main.cpp
 
-Platillo.o: Platillo.cpp Platillo.h
-	g++ -c Platillo.cpp
+Alimento.o: Alimento.cpp Alimento.h
+	g++ -c Alimento.cpp
 
-Orden.o: Orden.cpp Orden.h PlatilloNode.h
+Orden.o: Orden.cpp Orden.h AlimentoNode.h
 	g++ -c Orden.cpp
 
-Menu.o: Menu.cpp Menu.h PlatilloNode.h
+Menu.o: Menu.cpp Menu.h AlimentoNode.h
 	g++ -c Menu.cpp
 
 Ingrediente.o: Ingrediente.cpp Ingrediente.h
