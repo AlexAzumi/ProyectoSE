@@ -35,6 +35,9 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID);
 void insertElementStart(PlatilloNodePointer *nodeAnchor, int *lastID);
 void printAllElements(PlatilloNodePointer nodeAnchor);
 void searchByID(PlatilloNodePointer *nodeAnchor);
+//Ordenamientos en la Lista Simp. Ligada
+void bubbleSortByName(PlatilloNodePointer *nodeAnchor);
+void bubbleSortByCTime(PlatilloNodePointer *nodeAnchor);
 // Helpers
 int getMenu();
 void clearConsole();
@@ -78,6 +81,18 @@ int main()
     case 5:
     {
       searchByID(&nodeAnchor);
+      break;
+    }
+    case 6:
+    {
+      cout << "Ordenando por nombre...";
+      bubbleSortByName(&nodeAnchor);
+      break;
+    }
+    case 7:
+    {
+      cout << "Ordenando por tiempo de preparacion...";
+      bubbleSortByCTime(&nodeAnchor);
       break;
     }
     case 8:
@@ -758,4 +773,63 @@ void insertElementInPosition(PlatilloNodePointer *nodeAnchor, int *lastID)
 
     pauseScreen();
   }
+}
+
+/*
+ * Ordenamiento burbuja por nombre
+*/
+void bubbleSortByName(PlatilloNodePointer *nodeAnchor)
+{
+    PlatilloNodePointer puntero = *nodeAnchor;
+    PlatilloNodePointer aux = nullptr;
+    Platillo dato;
+
+    while (puntero->nextNode != nullptr)
+    {
+        aux = puntero->nextNode;
+
+        while (aux != nullptr)
+        {
+            if (puntero->data.get_nombre() > aux->data.get_nombre())
+            {
+              dato = aux->data;
+              aux->data = puntero->data;
+              puntero->data = dato;
+            }
+
+                aux = aux->nextNode;
+        }
+
+          puntero = puntero->nextNode;
+    }
+}
+
+
+/*
+ * Ordenamiento burbuja por tiempo de preparacion
+*/
+void bubbleSortByCTime(PlatilloNodePointer *nodeAnchor)
+{
+    PlatilloNodePointer puntero = *nodeAnchor;
+    PlatilloNodePointer aux = nullptr;
+    Platillo dato;
+
+    while (puntero->nextNode != nullptr)
+    {
+      aux = puntero->nextNode;
+
+      while (aux != nullptr)
+      {
+        if (puntero->data.get_tiempo_preparacion() > aux->data.get_tiempo_preparacion())
+        {
+          dato = aux->data;
+          aux->data = puntero->data;
+          puntero->data = dato;
+        }
+
+          aux = aux->nextNode;
+      }
+
+        puntero = puntero->nextNode;
+    }
 }
