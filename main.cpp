@@ -38,6 +38,11 @@ void searchByID(AlimentoNodePointer *nodeAnchor);
 //Ordenamientos en la Lista Simp. Ligada
 void bubbleSortByName(AlimentoNodePointer *nodeAnchor);
 void bubbleSortByCTime(AlimentoNodePointer *nodeAnchor);
+
+//nuevas funciones para usar Binary search 
+int Size(AlimentoNodePointer nodeAnchor);
+AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer *nodeAnchor);
+void bubbleSortByID(AlimentoNodePointer *nodeAnchor);
 // Helpers
 int getMenu();
 void clearConsole();
@@ -107,6 +112,15 @@ int main()
     }
     case 10:
     {
+      int Ini=1, Fin=Size(nodeAnchor), data;
+      bubbleSortByID(&nodeAnchor);
+      cout<<"Ingrese el ID del platillo a buscar:";
+      cin>> data;
+      SearchBinary(data, Ini, Fin, &nodeAnchor);
+      break;
+    }
+    case 11:
+    {
       exit(0);
     }
     default:
@@ -162,7 +176,8 @@ int getMenu()
   cout << "7. Ordenar por tiempo de preparación" << endl;
   cout << "8. Mostrar todo los platillos" << endl;
   cout << "9. Editar platillo" << endl;
-  cout << "10. Finalizar programa" << endl;
+  cout << "10. Buscar platillo" << endl;
+  cout << "11. Finalizar programa" << endl;
   cout << "Opción: ";
   cin >> option;
 
@@ -844,4 +859,117 @@ void bubbleSortByCTime(AlimentoNode **nodeAnchor)
 
         puntero = puntero->nextNode;
     }
+}
+
+void bubbleSortByID(AlimentoNode **nodeAnchor)
+{
+    AlimentoNode *puntero = *nodeAnchor;
+    AlimentoNode *aux = nullptr;
+    Alimento dato;
+
+    while (puntero->nextNode != nullptr)
+    {
+      aux = puntero->nextNode;
+
+      while (aux != nullptr)
+      {
+        if (puntero->data.get_id() > aux->data.get_id())
+        {
+          dato = aux->data;
+          aux->data = puntero->data;
+          puntero->data = dato;
+        }
+
+          aux = aux->nextNode;
+      }
+
+        puntero = puntero->nextNode;
+    }
+}
+
+int Size(AlimentoNodePointer nodeAnchor)
+{
+    int i=0;
+    AlimentoNodePointer currentNode = nodeAnchor;
+    if (nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return i;
+  }
+  while (currentNode != nullptr)
+  {
+    // Go to next node
+    i++;
+    currentNode = currentNode->nextNode;
+  }
+   return i;
+}
+
+AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer *nodeAnchor)
+{
+  if(Ini>Fin)
+  {
+      cout<<"Entro a busqueda invalida, este valor nose encuentra en la lista:";
+      return 0;
+  }
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return 0;
+  }
+
+  int mid=(Ini+Fin)/2;//posicion
+  AlimentoNodePointer mitad;//direccion
+  AlimentoNodePointer previousNode;
+  AlimentoNodePointer currentNode;
+  AlimentoNodePointer tempNode;
+
+  currentNode = *nodeAnchor;
+
+    for(int i=1;i<=mid;i++)
+  {
+      if(i==mid)
+      {
+          mitad=currentNode;
+          break;
+      }
+      previousNode = currentNode;
+      currentNode = currentNode->nextNode;
+  }
+
+  if(mitad->data.get_id()==data)
+  {
+      pauseScreen();
+      cout << endl;
+      cout << "ID: " << currentNode->data.get_id() << endl;
+      cout << "Nombre: " << currentNode->data.get_nombre() << endl;
+      cout << "Costo para restaurante: " << currentNode->data.get_costo_restaurante() << endl;
+      cout << "Costo para comensal: " << currentNode->data.get_costo_comensal() << endl;
+      cout << "Tiempo de preparacion: " << currentNode->data.get_tiempo_preparacion() << endl;
+      cout << "Temporada: " << currentNode->data.get_temporada() << endl;
+      cout << "Categoría: " << currentNode->data.get_categoria() << endl;
+      cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+      cout << "Preparación: " << currentNode->data.get_tipo() << endl;
+      cout << endl;
+      pauseScreen();
+      return currentNode;
+  }
+
+  if(data < mitad->data.get_id())
+  {
+
+      SearchBinary(data, Ini, mid-1, nodeAnchor);
+
+  }else{
+
+          SearchBinary(data, mid+1, Fin, nodeAnchor);
+       };
 }
