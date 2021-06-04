@@ -181,6 +181,7 @@ void insertElementEnd(AlimentoNodePointer *nodeAnchor, int *lastID)
   string temporada;
   string categoria;
   string preparacion;
+  string tipo;
 
   clearConsole();
 
@@ -200,11 +201,14 @@ void insertElementEnd(AlimentoNodePointer *nodeAnchor, int *lastID)
   cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
   cin >> temporada;
   cin.ignore();
-  cout << "Tipo (Desayuno, Comida o Cena): ";
+  cout << "Categoría (Desayuno, Comida o Cena): ";
   cin >> categoria;
   cin.ignore();
   cout << "Explicación de preparación: ";
   cin >> preparacion;
+  cin.ignore();
+  cout << "Tipo (Platillo o Bebida): ";
+  cin >> tipo;
   cin.ignore();
 
   AlimentoNodePointer previousNode;
@@ -223,6 +227,7 @@ void insertElementEnd(AlimentoNodePointer *nodeAnchor, int *lastID)
     newNode->data.set_temporada(temporada);
     newNode->data.set_categoria(categoria);
     newNode->data.set_preparacion(preparacion);
+    newNode->data.set_tipo(tipo);
 
     previousNode = nullptr;
     currentNode = *nodeAnchor;
@@ -272,6 +277,7 @@ void insertElementStart(AlimentoNodePointer *nodeAnchor, int *lastID)
   string temporada;
   string categoria;
   string preparacion;
+  string tipo;
 
   clearConsole();
 
@@ -291,11 +297,14 @@ void insertElementStart(AlimentoNodePointer *nodeAnchor, int *lastID)
   cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
   cin >> temporada;
   cin.ignore();
-  cout << "Tipo (Desayuno, Comida o Cena): ";
+  cout << "Categoría (Desayuno, Comida o Cena): ";
   cin >> categoria;
   cin.ignore();
   cout << "Explicación de preparación: ";
   cin >> preparacion;
+  cin.ignore();
+  cout << "Tipo (Platillo o Bebida): ";
+  cin >> tipo;
   cin.ignore();
 
   AlimentoNodePointer newNode;
@@ -312,6 +321,7 @@ void insertElementStart(AlimentoNodePointer *nodeAnchor, int *lastID)
     newNode->data.set_temporada(temporada);
     newNode->data.set_categoria(categoria);
     newNode->data.set_preparacion(preparacion);
+    newNode->data.set_tipo(tipo);
 
     newNode->nextNode = *nodeAnchor;
     *nodeAnchor = newNode;
@@ -363,8 +373,9 @@ void printAllElements(AlimentoNodePointer nodeAnchor)
     cout << "Costo para restaurante: " << currentNode->data.get_costo_restaurante() << endl;
     cout << "Costo para comensal: " << currentNode->data.get_costo_comensal() << endl;
     cout << "Temporada: " << currentNode->data.get_temporada() << endl;
-    cout << "Tipo: " << currentNode->data.get_categoria() << endl;
+    cout << "Categoría: " << currentNode->data.get_categoria() << endl;
     cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+    cout << "Tipo: " << currentNode->data.get_tipo() << endl;
     cout << endl;
 
     // Go to next node
@@ -497,8 +508,9 @@ void searchByID(AlimentoNodePointer *nodeAnchor)
     cout << "Costo para restaurante: " << currentNode->data.get_costo_restaurante() << endl;
     cout << "Costo para comensal: " << currentNode->data.get_costo_comensal() << endl;
     cout << "Temporada: " << currentNode->data.get_temporada() << endl;
-    cout << "Tipo: " << currentNode->data.get_categoria() << endl;
+    cout << "Categoría: " << currentNode->data.get_categoria() << endl;
     cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+    cout << "Preparación: " << currentNode->data.get_tipo() << endl;
     cout << endl;
 
     pauseScreen();
