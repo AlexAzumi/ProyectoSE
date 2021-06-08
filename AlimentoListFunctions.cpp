@@ -637,6 +637,16 @@ void bubbleSortByName(AlimentoNode **nodeAnchor)
   cout << endl;
   cout << "- Ordenar alimentos por nombre -" << endl;
 
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+
+    pauseScreen();
+
+    return;
+  }
+
   AlimentoNode *puntero = *nodeAnchor;
   AlimentoNode *aux = nullptr;
   Alimento dato;
@@ -675,6 +685,17 @@ void bubbleSortByCookTime(AlimentoNode **nodeAnchor)
   // Title
   cout << endl;
   cout << "- Ordenar alimentos por tiempo de preparación -" << endl;
+
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+    cout << endl;
+
+    pauseScreen();
+
+    return;
+  }
 
   AlimentoNode *puntero = *nodeAnchor;
   AlimentoNode *aux = nullptr;
