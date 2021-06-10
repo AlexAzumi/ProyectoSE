@@ -9,8 +9,7 @@ using std::cout;
 using std::endl;
 
 /**
- * Checks if the stack is empty
- * @returns true if the stack is empty
+ * Revisa si la pila se encuentra vacía
  */
 bool isEmpty(AlimentoNode **nodeAnchor)
 {
@@ -18,33 +17,24 @@ bool isEmpty(AlimentoNode **nodeAnchor)
 }
 
 /**
- * Unstacks the last inserted element (on the top)
+ * Añade todos los alimentos a la pila
  */
-void unstack(AlimentoNode **nodeAnchor)
+void addToStack(AlimentoNode **nodeAnchor, Alimento alimentos[], int length)
 {
-  clearConsole();
-
-  cout << endl;
-  cout << "- Desapilar elemento -" << endl;
-
-  if (isEmpty(nodeAnchor))
-  {
-    cout << endl;
-    cout << "La pila esta vacia" << endl;
-    pauseScreen();
-
-    return;
-  }
-
   AlimentoNode *tempNode = *nodeAnchor;
-  AlimentoNode *nextNode = tempNode->nextNode;
+  AlimentoNode *previousNode = nullptr;
 
-  *nodeAnchor = nextNode;
-
-  delete tempNode;
-
-  cout << endl;
-  cout << "El elemento fue desapilado correctamente" << endl;
-
-  pauseScreen();
+  for (int i = 0; i < length; i++)
+  {
+    if (isEmpty(nodeAnchor))
+    {
+      (*nodeAnchor) = new AlimentoNode();
+      (*nodeAnchor)->data = alimentos[i];
+    }
+    else
+    {
+      AlimentoNode *newNode = new AlimentoNode();
+      newNode->data = alimentos[i];
+    }
+  }
 }
