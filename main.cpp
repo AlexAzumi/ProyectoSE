@@ -108,6 +108,11 @@ int main()
     }
     case 11:
     {
+      //Instrucciones
+      break;
+    }
+    case 12:
+    {
       exit(0);
     }
     default:
