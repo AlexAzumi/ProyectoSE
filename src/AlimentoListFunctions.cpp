@@ -1,8 +1,8 @@
 #include <iostream>
-#include "AlimentoNode.h"
-#include "AlimentoListFunctions.h"
+#include "../headers/AlimentoNode.h"
+#include "../headers/AlimentoListFunctions.h"
 // App useful functions
-#include "AppFunctions.h"
+#include "../headers/AppFunctions.h"
 
 using std::cin;
 using std::cout;

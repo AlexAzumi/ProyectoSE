@@ -1,5 +1,5 @@
 #include <iostream>
-#include "AppFunctions.h"
+#include "../headers/AppFunctions.h"
 
 using std::atoi;
 using std::cin;

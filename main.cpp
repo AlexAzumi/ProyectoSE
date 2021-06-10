@@ -1,16 +1,16 @@
 #include <iostream>
 #include <string>
 // Clases
-#include "Alimento.h"
-#include "Orden.h"
-#include "Menu.h"
-#include "Ingrediente.h"
+#include "headers/Alimento.h"
+#include "headers/Orden.h"
+#include "headers/Menu.h"
+#include "headers/Ingrediente.h"
 // Nodos de clases
-#include "AlimentoNode.h"
+#include "headers/AlimentoNode.h"
 // Funciones de listas
-#include "AlimentoListFunctions.h"
+#include "headers/AlimentoListFunctions.h"
 // Funciones generales
-#include "AppFunctions.h"
+#include "headers/AppFunctions.h"
 
 // Needed stuff from std
 using std::atoi;
@@ -113,6 +113,9 @@ int main()
     }
     case 12:
     {
+      cout << endl;
+      cout << "Saliendo del programa..." << endl;
+
       exit(0);
     }
     default:

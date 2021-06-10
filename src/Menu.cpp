@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Menu.h"
-#include "AlimentoNode.h"
+#include "../headers/Menu.h"
+#include "../headers/AlimentoNode.h"
 
 using std::string;
 

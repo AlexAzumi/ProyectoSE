@@ -1,5 +1,5 @@
-#include "Orden.h"
-#include "Alimento.h"
+#include "../headers/Orden.h"
+#include "../headers/Alimento.h"
 
 Orden::Orden(int id, int table)
 {

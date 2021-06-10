@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Ingrediente.h"
+#include "../headers/Ingrediente.h"
 
 using std::string;
 
