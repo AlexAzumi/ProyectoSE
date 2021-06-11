@@ -109,9 +109,7 @@ int main()
     }
     case 11:
     {
-      //Instrucciones
       registerOrder(&nodeAnchor);
-      pauseScreen();
       break;
     }
     case 12:
