@@ -822,10 +822,14 @@ void quickSort(Alimento *array, int left, int right)
     }
   }
 
-  if (left < j)
+  if (left < j) 
+  {
     quickSort(array, left, j);
-  if (i < right)
+  }
+  else if (i < right)
+  {
     quickSort(array, i, right);
+  }
 }
 
 /*
