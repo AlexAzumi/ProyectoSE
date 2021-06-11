@@ -5,6 +5,7 @@
 #include "headers/Orden.h"
 #include "headers/Menu.h"
 #include "headers/Ingrediente.h"
+#include "headers/DynamicStack.h"
 // Nodos de clases
 #include "headers/AlimentoNode.h"
 // Funciones de listas
@@ -109,6 +110,8 @@ int main()
     case 11:
     {
       //Instrucciones
+      registerOrder(&nodeAnchor);
+      pauseScreen();
       break;
     }
     case 12:
@@ -229,7 +232,7 @@ AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer
     cout << "Tiempo de preparacion: " << currentNode->data.get_tiempo_preparacion() << endl;
     cout << "Temporada: " << currentNode->data.get_temporada() << endl;
     cout << "Categoría: " << currentNode->data.get_categoria() << endl;
-    cout << "Preparación: " << currentNode->data.get_preparacion() << endl;
+    cout << "Tiempo de reparación: " << currentNode->data.get_preparacion() << endl;
     cout << "Preparación: " << currentNode->data.get_tipo() << endl;
     cout << endl;
 
