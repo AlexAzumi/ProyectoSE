@@ -10,64 +10,63 @@ template <class T>
 class Stack
 {
 private:
-    class Node
-    {
-    private:
-        T data;
-        Node *link;
+  class Node
+  {
+  private:
+    T data;
+    Node *link;
 
-    public:
-        Node();
-        Node(const T &);
+  public:
+    Node();
+    Node(const T &);
 
-        void setData(const T &);
-        void setLink(Node *);
+    void setData(const T &);
+    void setLink(Node *);
 
-        T getData() const;
-        Node *getLink() const;
-    };
+    T getData() const;
+    Node *getLink() const;
+  };
 
-    Node *anchor;
+  Node *anchor;
 
-    void copyAll(const Stack &);
+  void copyAll(const Stack &);
 
-    void deleteAll();
+  void deleteAll();
 
 public:
+  //CLASE PARA LA EXCEPCION
+  class Exception : public std::exception
+  {
+  private:
+    std::string msg;
 
-    //CLASE PARA LA EXCEPCION
-    class Exception : public std::exception
+  public:
+    explicit Exception(const char *message) : msg(message) {}
+
+    explicit Exception(const std::string &message) : msg(message) {}
+
+    virtual ~Exception() throw() {}
+
+    virtual const char *what() const throw()
     {
-    private:
-        std::string msg;
+      return msg.c_str();
+    }
+  };
 
-    public:
-        explicit Exception(const char *message) : msg(message) {}
+  Stack();
+  Stack(const Stack &);
 
-        explicit Exception(const std::string &message) : msg(message) {}
+  ~Stack();
 
-        virtual ~Exception() throw() {}
+  bool isEmpty() const;
 
-        virtual const char *what() const throw()
-        {
-            return msg.c_str();
-        }
-    };
+  void push(const T &);
 
-    Stack();
-    Stack(const Stack &);
+  T pop();
 
-    ~Stack();
+  T getTop() const;
 
-    bool isEmpty() const;
-
-    void push(const T &);
-
-    T pop();
-
-    T getTop() const;
-
-    Stack &operator=(const Stack &);
+  Stack &operator=(const Stack &);
 };
 //FIN DEFINICION CLASE PILA
 
@@ -77,160 +76,160 @@ public:
 template <class T>
 Stack<T>::Node::Node()
 {
-    link = nullptr;
+  link = nullptr;
 }
 
 template <class T>
 Stack<T>::Node::Node(const T &element)
 {
-    data = element;
-    link = nullptr;
+  data = element;
+  link = nullptr;
 }
 
 template <class T>
 void Stack<T>::Node::setData(const T &element)
 {
-    data = element;
+  data = element;
 }
 
 template <class T>
 void Stack<T>::Node::setLink(Node *newLink)
 {
-    link = newLink;
+  link = newLink;
 }
 
 template <class T>
 T Stack<T>::Node::getData() const
 {
-    return data;
+  return data;
 }
 
 template <class T>
 typename Stack<T>::Node *Stack<T>::Node::getLink() const
 {
-    return link;
+  return link;
 }
 //FIN IMPLEMENTACION DEL NODO
 
 template <class T>
 void Stack<T>::copyAll(const Stack &stack)
 {
-    Node *aux = stack.anchor;
-    Node *last = nullptr;
-    Node *newNode;
+  Node *aux = stack.anchor;
+  Node *last = nullptr;
+  Node *newNode;
 
-    while (aux != nullptr)
+  while (aux != nullptr)
+  {
+    newNode = new Node(aux->getData());
+
+    if (last == nullptr)
     {
-        newNode = new Node(aux->getData());
-
-        if (last == nullptr)
-        {
-            anchor == newNode;
-        }
-        else
-        {
-            last->setLink(newNode);
-        }
-
-        last = newNode;
-
-        aux = aux->getLink();
+      anchor == newNode;
     }
+    else
+    {
+      last->setLink(newNode);
+    }
+
+    last = newNode;
+
+    aux = aux->getLink();
+  }
 }
 
 template <class T>
 void Stack<T>::deleteAll()
 {
-    Node *aux;
+  Node *aux;
 
-    while (anchor != nullptr)
-    {
-        aux = anchor;
+  while (anchor != nullptr)
+  {
+    aux = anchor;
 
-        anchor = anchor->getLink();
+    anchor = anchor->getLink();
 
-        delete aux;
-    }
+    delete aux;
+  }
 }
 
 template <class T>
 Stack<T>::Stack()
 {
-    anchor = nullptr;
+  anchor = nullptr;
 }
 
 template <class T>
 Stack<T>::Stack(const Stack<T> &stack)
 {
-    anchor = nullptr;
-    copyAll(stack);
+  anchor = nullptr;
+  copyAll(stack);
 }
 
 template <class T>
 Stack<T>::~Stack()
 {
-    deleteAll();
+  deleteAll();
 }
 
 template <class T>
 bool Stack<T>::isEmpty() const
 {
-    return anchor == nullptr;
+  return anchor == nullptr;
 }
 
 template <class T>
 void Stack<T>::push(const T &element)
 {
-    Node *aux(new Node(element));
+  Node *aux(new Node(element));
 
-    if(aux == nullptr)
-    {
-        throw Exception("Memoria no disponible para apilar");
-    }
+  if (aux == nullptr)
+  {
+    throw Exception("Memoria no disponible para apilar");
+  }
 
-    aux->setLink(anchor);
+  aux->setLink(anchor);
 
-    anchor = aux;
+  anchor = aux;
 }
 
 template <class T>
 T Stack<T>::pop()
 {
-    if(anchor == nullptr)
-    {
-        throw Exception("Insuficiencia de datos para desapilar");
-    }
+  if (anchor == nullptr)
+  {
+    throw Exception("Insuficiencia de datos para desapilar");
+  }
 
-    T result(anchor->getData());
+  T result(anchor->getData());
 
-    Node *aux(anchor);
+  Node *aux(anchor);
 
-    anchor = anchor->getLink();
+  anchor = anchor->getLink();
 
-    delete aux;
+  delete aux;
 
-    return result;
+  return result;
 }
 
 template <class T>
 T Stack<T>::getTop() const
 {
-    if(anchor == nullptr)
-    {
-        throw Exception("Insuficiencia de datos");
-    }
+  if (anchor == nullptr)
+  {
+    throw Exception("Insuficiencia de datos");
+  }
 
-    return anchor->getData();
+  return anchor->getData();
 }
 
 template <class T>
 Stack<T> &Stack<T>::operator=(const Stack<T> &stack)
 {
-    deleteAll();
+  deleteAll();
 
-    copyAll(stack);
+  copyAll(stack);
 
-    return *this;
+  return *this;
 }
 
 #endif

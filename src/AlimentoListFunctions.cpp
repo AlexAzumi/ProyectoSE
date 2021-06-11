@@ -3,7 +3,6 @@
 #include "../headers/AlimentoListFunctions.h"
 #include "../headers/DynamicStack.h"
 
-
 // App useful functions
 #include "../headers/AppFunctions.h"
 
@@ -744,47 +743,47 @@ void bubbleSortByCookTime(AlimentoNode **nodeAnchor)
  */
 Alimento searchFood(AlimentoNode **nodeAnchor, int id)
 {
-    Alimento result;
+  Alimento result;
 
-    if (*nodeAnchor == nullptr)
+  if (*nodeAnchor == nullptr)
+  {
+    cout << endl;
+    cout << "La lista está vacía" << endl;
+  }
+
+  cin.ignore();
+
+  AlimentoNode *previousNode;
+  AlimentoNode *currentNode;
+  AlimentoNode *tempNode;
+
+  currentNode = *nodeAnchor;
+
+  while (currentNode != nullptr)
+  {
+    if (currentNode->data.get_id() == id)
     {
-        cout << endl;
-        cout << "La lista está vacía" << endl;
+      break;
     }
 
-    cin.ignore();
+    previousNode = currentNode;
+    currentNode = currentNode->nextNode;
+  }
 
-    AlimentoNode *previousNode;
-    AlimentoNode *currentNode;
-    AlimentoNode *tempNode;
+  if (currentNode != nullptr)
+  {
+    result = currentNode->data;
+  }
+  else
+  {
+    cout << endl;
+    cout << "No se encontró el elemento con ID: " << id << endl;
 
-    currentNode = *nodeAnchor;
-
-    while (currentNode != nullptr)
-    {
-        if (currentNode->data.get_id() == id)
-        {
-            break;
-        }
-
-        previousNode = currentNode;
-        currentNode = currentNode->nextNode;
-    }
-
-    if (currentNode != nullptr)
-    {
-        result = currentNode->data;
-    }
-    else
-    {
-        cout << endl;
-        cout << "No se encontró el elemento con ID: " << id << endl;
-
-        pauseScreen();
-    }
-
-    return result;
     pauseScreen();
+  }
+
+  return result;
+  pauseScreen();
 }
 
 /*
@@ -793,10 +792,9 @@ Alimento searchFood(AlimentoNode **nodeAnchor, int id)
 void swapData(Alimento &a, Alimento &b)
 {
   Alimento aux(a);
-   a = b;
+  a = b;
   b = aux;
 }
-
 
 /*
  * QuickSort 1
@@ -846,57 +844,59 @@ void quickSort(Platillo data[], const int &leftEdge, const int &rightEdge)
  */
 void quickSort(Alimento *array, int left, int right)
 {
-    int i = left, j = right;
-    Alimento aux;
-    Alimento piv = array[(left + right) / 2];
+  int i = left, j = right;
+  Alimento aux;
+  Alimento piv = array[(left + right) / 2];
 
-    while(i <= j)
+  while (i <= j)
+  {
+    while (array[i].get_tiempo_preparacion() < piv.get_tiempo_preparacion())
+      i++;
+    while (array[j].get_tiempo_preparacion() > piv.get_tiempo_preparacion())
+      j--;
+
+    if (i <= j)
     {
-        while(array[i].get_tiempo_preparacion() < piv.get_tiempo_preparacion()) i++;
-        while(array[j].get_tiempo_preparacion() > piv.get_tiempo_preparacion()) j--;
-
-        if(i <= j)
-        {
-            aux = array[i];
-            array[i] = array[j];
-            array[j] = aux;
-            i++; j--;
-        }
+      aux = array[i];
+      array[i] = array[j];
+      array[j] = aux;
+      i++;
+      j--;
     }
+  }
 
-    if(left < j)
-        quickSort(array, left, j);
-    if(i < right)
-        quickSort(array, i, right);
+  if (left < j)
+    quickSort(array, left, j);
+  if (i < right)
+    quickSort(array, i, right);
 }
-
 
 /*
  * Registra la comanda, la ordena por tiempo y apila los platillos
 */
 void registerOrder(AlimentoNode **nodeAnchor)
 {
-    int N, id;
-    Stack<Alimento> pila;
-    Alimento *comanda[N];
-    int last = N - 1;
-    Alimento *platillo;
+  int N, id;
+  Stack<Alimento> pila;
+  Alimento *comanda[N];
+  int last = N - 1;
+  Alimento *platillo;
 
-    cout << "Ingresa la cantidad de platillos que deseas registrar para esta comanda:" << endl;
-    cin >> N;
+  cout << "Ingresa la cantidad de platillos que deseas registrar para esta comanda:" << endl;
+  cin >> N;
 
-    //Ingresa los platillos a un arreglo
-    for (int i = 0; i < N; i++)
-    {
-        cout << "Ingresa el ID del platillo " << i + 1 << " que deseas registrar en la comanda" << endl;
-        cin >> id;
-        platillo = new Alimento;
-        *platillo = searchFood(nodeAnchor, id);
-        comanda[i] = platillo;
-        //cout << comanda[i]->get_nombre(); //esto solo esta de prueba
-    }
+  //Ingresa los platillos a un arreglo
+  for (int i = 0; i < N; i++)
+  {
+    cout << "Ingresa el ID del platillo " << i + 1 << " que deseas registrar en la comanda" << endl;
+    cin >> id;
+    platillo = new Alimento;
+    *platillo = searchFood(nodeAnchor, id);
+    comanda[i] = platillo;
+    //cout << comanda[i]->get_nombre(); //esto solo esta de prueba
+  }
 
-    /*Para ver el contenido antes de ser ordenado
+  /*Para ver el contenido antes de ser ordenado
     // contenido antes de orden
     for (int i = 0; i < N; i++)
     {
@@ -908,11 +908,11 @@ void registerOrder(AlimentoNode **nodeAnchor)
     }
     */
 
-    //Ordenamiento de los platillos, de mayor a menor para que
-    // los menores sean preparados primero
-    //quickSort(*comanda, 0, last);
+  //Ordenamiento de los platillos, de mayor a menor para que
+  // los menores sean preparados primero
+  //quickSort(*comanda, 0, last);
 
-    /* /Para ver el contenido despues de ser ordenado
+  /* /Para ver el contenido despues de ser ordenado
     for (int i = 0; i < N; i++)
     {
         cout << endl;
@@ -922,14 +922,14 @@ void registerOrder(AlimentoNode **nodeAnchor)
     }
     */
 
-    //Apilamiento de los platillos
-    for(int i = 0; i < N; i++)
-    {
-        pila.push(*comanda[i]);
-    }
-    cout << endl;
-    
-    /* /Desapila y muestra el contenido
+  //Apilamiento de los platillos
+  for (int i = 0; i < N; i++)
+  {
+    pila.push(*comanda[i]);
+  }
+  cout << endl;
+
+  /* /Desapila y muestra el contenido
     while(!pila.isEmpty())
     {
         *platillo = pila.pop();
@@ -938,4 +938,3 @@ void registerOrder(AlimentoNode **nodeAnchor)
     }
     */
 }
-
