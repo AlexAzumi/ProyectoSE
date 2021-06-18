@@ -6,6 +6,7 @@
 #include "headers/Menu.h"
 #include "headers/Ingrediente.h"
 #include "headers/DynamicStack.h"
+#include "headers/DynamicQueue.h"
 // Nodos de clases
 #include "headers/AlimentoNode.h"
 // Funciones de listas

@@ -2,6 +2,7 @@
 #include "../headers/AlimentoNode.h"
 #include "../headers/AlimentoListFunctions.h"
 #include "../headers/DynamicStack.h"
+#include "../headers/DynamicQueue.h"
 
 // App useful functions
 #include "../headers/AppFunctions.h"
@@ -812,7 +813,7 @@ void quickSort(Alimento *array, int left, int right)
     while (array[j].get_tiempo_preparacion() > piv.get_tiempo_preparacion())
       j--;
 
-    if (i <= j)
+    if (i < j)
     {
       aux = array[i];
       array[i] = array[j];
@@ -839,6 +840,7 @@ void registerOrder(AlimentoNode **nodeAnchor)
 {
   int N, id;
   Stack<Alimento> pila;
+  Queue<Alimento> cola;
   Alimento *comanda[N];
   int last = N - 1;
   Alimento *platillo;
@@ -868,20 +870,31 @@ void registerOrder(AlimentoNode **nodeAnchor)
 
   // Ordenamiento de los platillos, de mayor a menor para que
   // los menores sean preparados primero
+  cout << endl << "Haciendo ordenamiento..." << endl;
   quickSort(*comanda, 0, last);
 
   // Apilamiento de los platillos
+  cout << endl << "Apilando platillos..." << endl;
   for (int i = 0; i < N; i++)
   {
     pila.push(*comanda[i]);
   }
   cout << endl;
 
-  // Desapila y muestra el contenido
+  //Desapila (volcado de pila) y encola los platillos
+  cout << "Desapilando y encolando platillos..." << endl;
   while(!pila.isEmpty())
   {
-    *platillo = pila.pop();
-    // Mostrando solo el nombre
+    cola.enqueue(pila.pop());
+  }
+  
+  //Desencola y muestra los platillos
+  cout << "Desencolando platillos..." << endl;
+  cout << "Orden de preparación de platillos:" << endl;
+  while(!cola.isEmpty())
+  {
+    *platillo = cola.dequeue();
+    //Mostrando solo el nombre
     cout << platillo->get_nombre() << endl;
   }
 
