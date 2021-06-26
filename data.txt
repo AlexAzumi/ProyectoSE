@@ -1,0 +1,8 @@
+id=1
+nombre=Alimento uno
+costo_comensal=10.5
+costo_restaurante=11.5
+temporada=Primavera
+categoria=Desayuno
+preparacion=Se hacen unos goebos
+tipo=Platillo

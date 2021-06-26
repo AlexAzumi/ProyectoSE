@@ -9,6 +9,7 @@ class Alimento
 {
 public:
   Alimento();
+  Alimento(int id);
   // Setters
   void set_id(int nuevo_id);
   void set_nombre(string nuevo_nombre);

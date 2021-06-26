@@ -1,11 +1,14 @@
-app: main.o Alimento.o Orden.o Menu.o Ingrediente.o AlimentoListFunctions.o AppFunctions.o AlimentoQueueFunctions.o
-	g++ -o app main.o Alimento.o Orden.o Menu.o Ingrediente.o AlimentoListFunctions.o AppFunctions.o AlimentoQueueFunctions.o
+app: main.o Alimento.o Orden.o Menu.o Ingrediente.o AlimentoListFunctions.o AppFunctions.o AlimentoQueueFunctions.o FileSystem.o
+	g++ -o app main.o Alimento.o Orden.o Menu.o Ingrediente.o AlimentoListFunctions.o AppFunctions.o AlimentoQueueFunctions.o FileSystem.o
 
 main.o: main.cpp headers/Alimento.h headers/AlimentoNode.h headers/AlimentoListFunctions.h headers/AppFunctions.h
 	g++ -c main.cpp
 
 AppFunctions.o: src/AppFunctions.cpp headers/AppFunctions.h
 	g++ -c src/AppFunctions.cpp
+
+FileSystem.o: src/FileSystem.cpp headers/FileSystem.h
+	g++ -c src/FileSystem.cpp
 
 Alimento.o: src/Alimento.cpp headers/Alimento.h
 	g++ -c src/Alimento.cpp

@@ -13,6 +13,7 @@
 #include "headers/AlimentoListFunctions.h"
 // Funciones generales
 #include "headers/AppFunctions.h"
+#include "headers/FileSystem.h"
 
 // Needed stuff from std
 using std::atoi;
@@ -44,8 +45,11 @@ int main()
   int option = 0;
   int lastID = 0;
   AlimentoNode *nodeAnchor = nullptr;
+  Alimento *menuAnchor = nullptr;
 
   clearConsole();
+
+  getAlimentosFromFile(&menuAnchor, "Primavera");
 
   while (true)
   {

@@ -13,6 +13,18 @@ Alimento::Alimento()
   Alimento::tipo = "";
 }
 
+Alimento::Alimento(int id)
+{
+  Alimento::id = id;
+  Alimento::nombre = "";
+  Alimento::costo_comensal = 0.0f;
+  Alimento::tiempo_preparacion = 0.0f;
+  Alimento::temporada = "";
+  Alimento::categoria = "";
+  Alimento::preparacion = "";
+  Alimento::tipo = "";
+}
+
 /* Setters */
 
 void Alimento::set_id(int nuevo_id)
