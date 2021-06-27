@@ -3,7 +3,10 @@
 #include "../headers/FileSystem.h"
 #include "../headers/Alimento.h"
 #include "../headers/AlimentoNode.h"
+#include "../headers/Menu.h"
+#include "../headers/AppFunctions.h"
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::exit;
@@ -16,6 +19,103 @@ using std::string;
 
 string tokenize(string s);
 void printNode(AlimentoNode **node);
+Menu getMyMenu();
+
+/**
+ * Obtiene y regresa un menú completo
+ */
+Menu getMyMenu()
+{
+  string category = "";
+  string season = "";
+
+  clearConsole();
+
+  cout << "- GENERAR MENÚ -" << endl;
+
+  // Obtener temporada
+  while (season == "")
+  {
+    char option[99];
+
+    cout << endl;
+    cout << "SELECCIONE TEMPORADA" << endl;
+    cout << "1. Primavera" << endl;
+    cout << "2. Verano" << endl;
+    cout << "3. Otoño" << endl;
+    cout << "4. Invierno" << endl;
+    cout << "5. Navideño" << endl;
+    cout << "Opción: ";
+    cin >> option;
+    cin.ignore();
+
+    switch (atoi(option))
+    {
+    case 1:
+      season = "Primavera";
+      break;
+    case 2:
+      season = "Verano";
+      break;
+    case 3:
+      season = "Otoño";
+      break;
+    case 4:
+      season = "Invierno";
+      break;
+    case 5:
+      season = "Navideño";
+      break;
+    default:
+      cout << endl;
+      cout << "Opción no válida" << endl;
+      pauseScreen();
+      break;
+    }
+  }
+
+  // Obtener categoría
+  while (category == "")
+  {
+    char option[99];
+
+    cout << endl;
+    cout << "SELECCIONE TIPO/CATEGORÍA" << endl;
+    cout << "1. Desayuno" << endl;
+    cout << "2. Comida" << endl;
+    cout << "3. Cena" << endl;
+    cout << "Opción: ";
+    cin >> option;
+    cin.ignore();
+
+    switch (atoi(option))
+    {
+    case 1:
+      category = "Desayuno";
+      break;
+    case 2:
+      category = "Comida";
+      break;
+    case 3:
+      category = "Cena";
+      break;
+    default:
+      cout << endl;
+      cout << "Opción no válida" << endl;
+      pauseScreen();
+      break;
+    }
+  }
+
+  // Generar menú
+  AlimentoNode *anchor = nullptr;
+
+  getAlimentosFromFile(&anchor, season, category);
+
+  Menu myMenu = Menu(&anchor, season);
+
+  return myMenu;
+}
 
 /**
  * Obtiene todos los alimentos necesarios para la iniciación del menú

@@ -45,11 +45,10 @@ int main()
   int option = 0;
   int lastID = 0;
   AlimentoNode *nodeAnchor = nullptr;
-  AlimentoNode *menuAnchor = nullptr;
 
   clearConsole();
 
-  getAlimentosFromFile(&menuAnchor, "Primavera", "Desayuno");
+  Menu myMenu = getMyMenu();
 
   while (true)
   {
