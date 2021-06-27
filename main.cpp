@@ -45,7 +45,7 @@ int main()
   int option = 0;
   int lastID = 0;
   AlimentoNode *nodeAnchor = nullptr;
-  Alimento *menuAnchor = nullptr;
+  AlimentoNode *menuAnchor = nullptr;
 
   clearConsole();
 
