@@ -324,6 +324,58 @@ void addElementToFile(Alimento data)
 }
 
 /**
+ * Edita la información de un campo
+ */
+void editElementFromFile(int id, string key, string newValue)
+{
+  string text;
+  ofstream temp;
+  fstream dataFile;
+
+  dataFile.open("data.txt");
+
+  temp.open("temp.txt");
+
+  bool foundElement = false;
+
+  // Read the file line by line
+  while (getline(dataFile, text))
+  {
+    if (text.find("id") != string::npos)
+    {
+      // Get ID
+      string value = tokenize(text);
+      // Save ID
+      if (value != "" && stoi(value) == id)
+      {
+        foundElement = true;
+      }
+    }
+    else if (foundElement)
+    {
+      if (text.find(key) != string::npos)
+      {
+        text = key + "=" + newValue;
+        foundElement = false;
+      }
+      else if (text == "")
+      {
+        foundElement = false;
+      }
+    }
+
+    temp << text << endl;
+  }
+
+  // Cerrar archivos
+  dataFile.close();
+  temp.close();
+
+  remove("data.txt");
+  rename("temp.txt", "data.txt");
+}
+
+/**
  * Extraer información de la línea de texto
  */
 string tokenize(string s)

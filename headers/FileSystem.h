@@ -8,6 +8,7 @@
 Menu getMyMenu();
 void addElementToFile(Alimento data);
 void deleteElementFromFile(int id);
+void editElementFromFile(int id, string key, string newValue);
 void getAlimentosFromFile(AlimentoNode **anchor, string season, string category);
 
 #endif
