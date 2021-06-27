@@ -20,7 +20,7 @@ void printNode(AlimentoNode **node);
 /**
  * Obtiene todos los alimentos necesarios para la iniciación del menú
  */
-void getAlimentosFromFile(AlimentoNode **anchor, string type)
+void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
 {
   string text;
   fstream dataFile;
@@ -100,24 +100,32 @@ void getAlimentosFromFile(AlimentoNode **anchor, string type)
           }
         }
 
-        AlimentoNode *currentNode = *anchor;
-
-        // IMPRIMIR NODO. ¡ELIMINAR AL FIN DEL DESARROLLO!
-        printNode(&newNode);
-
-        // Guardar en lista
-        if (currentNode == nullptr)
+        // Revisar si categoría coincide con la deseada
+        if (newNode->data.get_categoria().compare(category) != 0 || newNode->data.get_temporada().compare(season) != 0)
         {
-          *anchor = newNode;
+          delete newNode;
         }
         else
         {
-          while (currentNode->nextNode != nullptr)
-          {
-            currentNode = currentNode->nextNode;
-          }
+          AlimentoNode *currentNode = *anchor;
 
-          currentNode->nextNode = newNode;
+          // IMPRIMIR NODO. ¡ELIMINAR AL FIN DEL DESARROLLO!
+          printNode(&newNode);
+
+          // Guardar en lista
+          if (currentNode == nullptr)
+          {
+            *anchor = newNode;
+          }
+          else
+          {
+            while (currentNode->nextNode != nullptr)
+            {
+              currentNode = currentNode->nextNode;
+            }
+
+            currentNode->nextNode = newNode;
+          }
         }
       }
       else

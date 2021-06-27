@@ -49,7 +49,7 @@ int main()
 
   clearConsole();
 
-  getAlimentosFromFile(&menuAnchor, "Primavera");
+  getAlimentosFromFile(&menuAnchor, "Primavera", "Desayuno");
 
   while (true)
   {
