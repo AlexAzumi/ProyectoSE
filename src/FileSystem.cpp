@@ -210,7 +210,7 @@ void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
           AlimentoNode *currentNode = *anchor;
 
           // IMPRIMIR NODO. ¡ELIMINAR AL FIN DEL DESARROLLO!
-          printNode(&newNode);
+          // printNode(&newNode);
 
           // Guardar en lista
           if (currentNode == nullptr)
