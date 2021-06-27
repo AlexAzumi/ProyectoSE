@@ -13,6 +13,9 @@ using std::exit;
 using std::fstream;
 using std::getline;
 using std::ios;
+using std::ofstream;
+using std::remove;
+using std::rename;
 using std::stof;
 using std::stoi;
 using std::string;
@@ -234,6 +237,88 @@ void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
       }
     }
   }
+
+  dataFile.close();
+}
+
+/**
+ * Eliminar un elemento del archivo
+ */
+void deleteElementFromFile(int id)
+{
+  string text;
+  ofstream temp;
+  fstream dataFile;
+
+  // Load the file
+  dataFile.open("data.txt", ios::in);
+
+  // Create temporary file
+  temp.open("temp.txt");
+
+  bool foundElement = false;
+
+  while (getline(dataFile, text))
+  {
+    if (text.find("id") != string::npos && !foundElement)
+    {
+      // Obtener ID
+      string value = tokenize(text);
+      // Revisar ID
+      if (value != "" && stoi(value) == id)
+      {
+        foundElement = true;
+        continue;
+      }
+      else
+      {
+        temp << text << endl;
+      }
+    }
+    else if (foundElement)
+    {
+      // Revisar si se encontró una linea vacía
+      // Si esto es así significa que todas las propiedades del elemento que no se deseaba
+      // ya fueron ignoradas
+      if (text == "")
+      {
+        foundElement = false;
+      }
+    }
+    else
+    {
+      // Sigue escribiendo el archivo
+      temp << text << endl;
+    }
+  }
+
+  // Cerrar archivos
+  dataFile.close();
+  temp.close();
+
+  remove("data.txt");
+  rename("temp.txt", "data.txt");
+}
+
+/**
+ * Añade un elemento al archivo
+ */
+void addElementToFile(Alimento data)
+{
+  ofstream dataFile;
+
+  dataFile.open("data.txt", ios::app);
+
+  dataFile << endl;
+  dataFile << "id=" << data.get_id() << endl;
+  dataFile << "nombre=" << data.get_nombre() << endl;
+  dataFile << "costo_comensal=" << data.get_costo_comensal() << endl;
+  dataFile << "costo_restaurante=" << data.get_costo_restaurante() << endl;
+  dataFile << "tiempo_preparacion=" << data.get_tiempo_preparacion() << endl;
+  dataFile << "temporada=" << data.get_temporada() << endl;
+  dataFile << "categoria=" << data.get_categoria() << endl;
+  dataFile << "preparacion=" << data.get_preparacion() << endl;
+  dataFile << "tipo=" << data.get_tipo() << endl;
 
   dataFile.close();
 }

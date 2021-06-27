@@ -6,6 +6,7 @@ Alimento::Alimento()
   Alimento::id = 0;
   Alimento::nombre = "";
   Alimento::costo_comensal = 0.0f;
+  Alimento::costo_restaurante = 0.0f;
   Alimento::tiempo_preparacion = 0.0f;
   Alimento::temporada = "";
   Alimento::categoria = "";
@@ -18,6 +19,7 @@ Alimento::Alimento(int id)
   Alimento::id = id;
   Alimento::nombre = "";
   Alimento::costo_comensal = 0.0f;
+  Alimento::costo_restaurante = 0.0f;
   Alimento::tiempo_preparacion = 0.0f;
   Alimento::temporada = "";
   Alimento::categoria = "";

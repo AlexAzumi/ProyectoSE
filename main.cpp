@@ -50,6 +50,8 @@ int main()
 
   Menu myMenu = getMyMenu();
 
+  clearConsole();
+
   while (true)
   {
     option = getMenu();

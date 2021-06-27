@@ -37,13 +37,3 @@ temporada=Verano
 categoria=Desayuno
 preparacion=Se hacen unos goebos
 tipo=Platillo
-
-id=5
-nombre=
-costo_comensal=0
-costo_restaurante=0
-tiempo_preparacion=0
-temporada=
-categoria=
-preparacion=
-tipo=
