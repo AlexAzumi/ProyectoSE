@@ -3,6 +3,7 @@
 #include "../headers/AlimentoListFunctions.h"
 #include "../headers/DynamicStack.h"
 #include "../headers/DynamicQueue.h"
+#include "../headers/FileSystem.h"
 
 // App useful functions
 #include "../headers/AppFunctions.h"
@@ -10,6 +11,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+using std::to_string;
 
 /**
  * Elimina un alimento buscandolo por ID
@@ -71,6 +73,8 @@ void deleteByID(AlimentoNode **nodeAnchor)
 
     cout << endl;
     cout << "El elemento fue eliminado correctamente" << endl;
+
+    deleteElementFromFile(id);
 
     pauseScreen();
   }
@@ -167,6 +171,8 @@ void insertElementEnd(AlimentoNode **nodeAnchor, int *lastID)
     }
 
     *lastID = *lastID + 1;
+
+    addElementToFile(newNode->data);
 
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
@@ -272,6 +278,8 @@ void insertElementInPosition(AlimentoNode **nodeAnchor, int *lastID)
       newNode->nextNode = currentNode;
     }
 
+    addElementToFile(newNode->data);
+
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
 
@@ -351,6 +359,8 @@ void insertElementStart(AlimentoNode **nodeAnchor, int *lastID)
     *nodeAnchor = newNode;
 
     *lastID = *lastID + 1;
+
+    addElementToFile(newNode->data);
 
     cout << endl;
     cout << "El platillo se agregó correctamente" << endl;
@@ -557,6 +567,9 @@ void editElement(AlimentoNode **nodeAnchor)
         cout << "Ingresa el nuevo ID del platillo" << endl;
         cin >> newId;
         currentNode->data.set_id(newId);
+
+        editElementFromFile(id, "id", to_string(newId));
+
         cout << "ID modificado exitosamente" << endl;
         break;
 
@@ -566,6 +579,9 @@ void editElement(AlimentoNode **nodeAnchor)
         std::getline(cin, newName);
         currentNode->data.set_nombre(newName);
         cout << "Nombre del platillo modificado exitosamente" << endl;
+
+        editElementFromFile(id, "nombre", newName);
+
         break;
 
       case 3:
@@ -574,6 +590,9 @@ void editElement(AlimentoNode **nodeAnchor)
         cin >> newCostRest;
         currentNode->data.set_costo_restaurante(newCostRest);
         cout << "Costo del platillo para el restaurante modificado exitosamente" << endl;
+
+        editElementFromFile(id, "costo_restaurante", to_string(newCostRest));
+
         break;
 
       case 4:
@@ -582,6 +601,9 @@ void editElement(AlimentoNode **nodeAnchor)
         cin >> newCostClient;
         currentNode->data.set_costo_comensal(newCostClient);
         cout << "Costo del platillo para el comensal modificado exitosamente" << endl;
+
+        editElementFromFile(id, "costo_comensal", to_string(newCostClient));
+
         break;
 
       case 5:
@@ -590,6 +612,9 @@ void editElement(AlimentoNode **nodeAnchor)
         std::getline(cin, newSeason);
         currentNode->data.set_temporada(newSeason);
         cout << "Temporada del platillo modificada exitosamente" << endl;
+
+        editElementFromFile(id, "temporada", newSeason);
+
         break;
 
       case 6:
@@ -598,6 +623,9 @@ void editElement(AlimentoNode **nodeAnchor)
         std::getline(cin, newCategory);
         currentNode->data.set_categoria(newCategory);
         cout << "Categoria del platillo modificada exitosamente" << endl;
+
+        editElementFromFile(id, "categoria", newCategory);
+
         break;
 
       case 7:
@@ -606,6 +634,9 @@ void editElement(AlimentoNode **nodeAnchor)
         std::getline(cin, newPreparation);
         currentNode->data.set_preparacion(newPreparation);
         cout << "Preparacion del platillo modificada exitosamente" << endl;
+
+        editElementFromFile(id, "preparacion", newPreparation);
+
         break;
 
       case 8:
@@ -614,6 +645,9 @@ void editElement(AlimentoNode **nodeAnchor)
         cin >> newPrepTime;
         currentNode->data.set_tiempo_preparacion(newPrepTime);
         cout << "Tiempo de preparacion del platillo modificado exitosamente" << endl;
+
+        editElementFromFile(id, "tiempo_preparacion", to_string(newPrepTime));
+
         break;
 
       default:
@@ -823,7 +857,7 @@ void quickSort(Alimento *array, int left, int right)
     }
   }
 
-  if (left < j) 
+  if (left < j)
   {
     quickSort(array, left, j);
   }
@@ -870,11 +904,13 @@ void registerOrder(AlimentoNode **nodeAnchor)
 
   // Ordenamiento de los platillos, de mayor a menor para que
   // los menores sean preparados primero
-  cout << endl << "Haciendo ordenamiento..." << endl;
+  cout << endl
+       << "Haciendo ordenamiento..." << endl;
   quickSort(*comanda, 0, last);
 
   // Apilamiento de los platillos
-  cout << endl << "Apilando platillos..." << endl;
+  cout << endl
+       << "Apilando platillos..." << endl;
   for (int i = 0; i < N; i++)
   {
     pila.push(*comanda[i]);
@@ -883,15 +919,15 @@ void registerOrder(AlimentoNode **nodeAnchor)
 
   //Desapila (volcado de pila) y encola los platillos
   cout << "Desapilando y encolando platillos..." << endl;
-  while(!pila.isEmpty())
+  while (!pila.isEmpty())
   {
     cola.enqueue(pila.pop());
   }
-  
+
   //Desencola y muestra los platillos
   cout << "Desencolando platillos..." << endl;
   cout << "Orden de preparación de platillos:" << endl;
-  while(!cola.isEmpty())
+  while (!cola.isEmpty())
   {
     *platillo = cola.dequeue();
     //Mostrando solo el nombre

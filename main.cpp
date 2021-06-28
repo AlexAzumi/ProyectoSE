@@ -44,11 +44,11 @@ int main()
 {
   int option = 0;
   int lastID = 0;
-  AlimentoNode *nodeAnchor = nullptr;
 
   clearConsole();
 
   Menu myMenu = getMyMenu();
+  AlimentoNode *nodeAnchor = myMenu.get_platillo_anchor();
 
   clearConsole();
 
