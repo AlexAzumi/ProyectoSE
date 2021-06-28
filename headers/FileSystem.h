@@ -5,6 +5,7 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
+int getLastIDFromFile();
 Menu getMyMenu();
 void addElementToFile(Alimento data);
 void deleteElementFromFile(int id);

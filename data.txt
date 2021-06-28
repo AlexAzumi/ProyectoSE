@@ -37,3 +37,13 @@ temporada=Verano
 categoria=Desayuno
 preparacion=Se hacen unos goebos
 tipo=Platillo
+
+id=5
+nombre=Señor platillo
+costo_comensal=52
+costo_restaurante=50
+tiempo_preparacion=50
+temporada=Invierno
+categoria=Comida
+preparacion=Se prepara chido
+tipo=Platillo

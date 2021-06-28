@@ -11,6 +11,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+using std::getline;
 using std::to_string;
 
 /**
@@ -105,11 +106,10 @@ void insertElementEnd(AlimentoNode **nodeAnchor, int *lastID)
 
   // Title
   cout << endl;
-  cout << "- Ingresar nuevo platillo al frente -" << endl;
+  cout << "- Ingresar nuevo platillo al final -" << endl;
   // Ask data
   cout << "Nombre: ";
-  cin >> nombre;
-  cin.ignore();
+  getline(cin, nombre);
   cout << "Costo al restaurante: ";
   cin >> costo_restaurante;
   cin.ignore();
@@ -117,20 +117,16 @@ void insertElementEnd(AlimentoNode **nodeAnchor, int *lastID)
   cin >> costo_comensal;
   cin.ignore();
   cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
-  cin >> temporada;
-  cin.ignore();
+  getline(cin, temporada);
   cout << "Categoría (Desayuno, Comida o Cena): ";
-  cin >> categoria;
-  cin.ignore();
+  getline(cin, categoria);
   cout << "Tiempo de preparación: ";
   cin >> tiempo_preparacion;
   cin.ignore();
   cout << "Explicación de preparación: ";
-  cin >> preparacion;
-  cin.ignore();
+  getline(cin, preparacion);
   cout << "Tipo (Platillo o Bebida): ";
-  cin >> tipo;
-  cin.ignore();
+  getline(cin, tipo);
 
   AlimentoNode *previousNode;
   AlimentoNode *currentNode;
@@ -201,6 +197,7 @@ void insertElementInPosition(AlimentoNode **nodeAnchor, int *lastID)
   string temporada;
   string categoria;
   string preparacion;
+  string tipo;
 
   clearConsole();
 
@@ -213,8 +210,7 @@ void insertElementInPosition(AlimentoNode **nodeAnchor, int *lastID)
   cin >> position;
   cin.ignore();
   cout << "Nombre: ";
-  cin >> nombre;
-  cin.ignore();
+  getline(cin, nombre);
   cout << "Costo al restaurante: ";
   cin >> costo_restaurante;
   cin.ignore();
@@ -222,17 +218,16 @@ void insertElementInPosition(AlimentoNode **nodeAnchor, int *lastID)
   cin >> costo_comensal;
   cin.ignore();
   cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
-  cin >> temporada;
-  cin.ignore();
-  cout << "Tipo (Desayuno, Comida o Cena): ";
-  cin >> categoria;
-  cin.ignore();
+  getline(cin, temporada);
+  cout << "Categoría (Desayuno, Comida o Cena): ";
+  getline(cin, categoria);
   cout << "Tiempo de preparación: ";
   cin >> tiempo_preparacion;
   cin.ignore();
   cout << "Explicación de preparación: ";
-  cin >> preparacion;
-  cin.ignore();
+  getline(cin, preparacion);
+  cout << "Tipo (Platillo o Bebida): ";
+  getline(cin, tipo);
 
   AlimentoNode *previousNode;
   AlimentoNode *currentNode;
@@ -250,6 +245,7 @@ void insertElementInPosition(AlimentoNode **nodeAnchor, int *lastID)
     newNode->data.set_temporada(temporada);
     newNode->data.set_categoria(categoria);
     newNode->data.set_preparacion(preparacion);
+    newNode->data.set_tipo(tipo);
 
     currentNode = *nodeAnchor;
 
@@ -315,8 +311,7 @@ void insertElementStart(AlimentoNode **nodeAnchor, int *lastID)
   cout << "- Ingresar nuevo platillo al frente -" << endl;
   // Ask data
   cout << "Nombre: ";
-  cin >> nombre;
-  cin.ignore();
+  getline(cin, nombre);
   cout << "Costo al restaurante: ";
   cin >> costo_restaurante;
   cin.ignore();
@@ -324,19 +319,16 @@ void insertElementStart(AlimentoNode **nodeAnchor, int *lastID)
   cin >> costo_comensal;
   cin.ignore();
   cout << "Temporada (Primavera, Verano, Otoño, Invierno o Navideño): ";
-  cin >> temporada;
-  cin.ignore();
+  getline(cin, temporada);
   cout << "Categoría (Desayuno, Comida o Cena): ";
-  cin >> categoria;
-  cin.ignore();
+  getline(cin, categoria);
   cout << "Tiempo de preparación: ";
   cin >> tiempo_preparacion;
   cin.ignore();
   cout << "Explicación de preparación: ";
-  cin >> preparacion;
-  cin.ignore();
+  getline(cin, preparacion);
   cout << "Tipo (Platillo o Bebida): ";
-  cin >> tipo;
+  getline(cin, tipo);
   cin.ignore();
 
   AlimentoNode *newNode;

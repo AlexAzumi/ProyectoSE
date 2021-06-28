@@ -20,9 +20,9 @@ using std::stof;
 using std::stoi;
 using std::string;
 
+Menu getMyMenu();
 string tokenize(string s);
 void printNode(AlimentoNode **node);
-Menu getMyMenu();
 
 /**
  * Obtiene y regresa un menú completo
@@ -373,6 +373,33 @@ void editElementFromFile(int id, string key, string newValue)
 
   remove("data.txt");
   rename("temp.txt", "data.txt");
+}
+
+int getLastIDFromFile()
+{
+  int lastID = 0;
+  string text;
+  fstream dataFile;
+
+  // Load the file
+  dataFile.open("data.txt", ios::in);
+
+  // Read the file line by line
+  while (getline(dataFile, text))
+  {
+    if (text.find("id") != string::npos)
+    {
+      // Get ID
+      string value = tokenize(text);
+      // Save ID
+      if (value != "")
+      {
+        lastID = stoi(value);
+      }
+    }
+  }
+
+  return lastID;
 }
 
 /**

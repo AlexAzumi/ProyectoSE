@@ -43,12 +43,13 @@ void bubbleSortByID(AlimentoNodePointer *nodeAnchor);
 int main()
 {
   int option = 0;
-  int lastID = 0;
 
   clearConsole();
 
   Menu myMenu = getMyMenu();
   AlimentoNode *nodeAnchor = myMenu.get_platillo_anchor();
+
+  int lastID = getLastIDFromFile();
 
   clearConsole();
 
