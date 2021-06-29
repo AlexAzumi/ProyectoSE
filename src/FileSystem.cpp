@@ -29,7 +29,6 @@ void printNode(AlimentoNode **node);
  */
 Menu getMyMenu()
 {
-  string category = "";
   string season = "";
 
   clearConsole();
@@ -77,43 +76,10 @@ Menu getMyMenu()
     }
   }
 
-  // Obtener categoría
-  while (category == "")
-  {
-    char option[99];
-
-    cout << endl;
-    cout << "SELECCIONE TIPO/CATEGORÍA" << endl;
-    cout << "1. Desayuno" << endl;
-    cout << "2. Comida" << endl;
-    cout << "3. Cena" << endl;
-    cout << "Opción: ";
-    cin >> option;
-    cin.ignore();
-
-    switch (atoi(option))
-    {
-    case 1:
-      category = "Desayuno";
-      break;
-    case 2:
-      category = "Comida";
-      break;
-    case 3:
-      category = "Cena";
-      break;
-    default:
-      cout << endl;
-      cout << "Opción no válida" << endl;
-      pauseScreen();
-      break;
-    }
-  }
-
   // Generar menú
   AlimentoNode *anchor = nullptr;
 
-  getAlimentosFromFile(&anchor, season, category);
+  getAlimentosFromFile(&anchor, season);
 
   Menu myMenu = Menu(&anchor, season);
 
@@ -123,7 +89,7 @@ Menu getMyMenu()
 /**
  * Obtiene todos los alimentos necesarios para la iniciación del menú
  */
-void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
+void getAlimentosFromFile(AlimentoNode **anchor, string season)
 {
   string text;
   fstream dataFile;
@@ -134,7 +100,7 @@ void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
   // Read the file line by line
   while (getline(dataFile, text))
   {
-    if (text.find("id") != string::npos)
+    if (text.find("id=") != string::npos)
     {
       // Get ID
       string value = tokenize(text);
@@ -157,42 +123,42 @@ void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
         // Get more elements
         while (getline(dataFile, text))
         {
-          if (text.find("nombre") != string::npos)
+          if (text.find("nombre=") != string::npos)
           {
             string nombre = tokenize(text);
             newNode->data.set_nombre(nombre);
           }
-          else if (text.find("costo_comensal") != string::npos)
+          else if (text.find("costo_comensal=") != string::npos)
           {
             string costo_comensal = tokenize(text);
             newNode->data.set_costo_comensal(stof(costo_comensal));
           }
-          else if (text.find("costo_restaurante") != string::npos)
+          else if (text.find("costo_restaurante=") != string::npos)
           {
             string costo_restaurante = tokenize(text);
             newNode->data.set_costo_restaurante(stof(costo_restaurante));
           }
-          else if (text.find("temporada") != string::npos)
+          else if (text.find("temporada=") != string::npos)
           {
             string temporada = tokenize(text);
             newNode->data.set_temporada(temporada);
           }
-          else if (text.find("categoria") != string::npos)
+          else if (text.find("categoria=") != string::npos)
           {
             string categoria = tokenize(text);
             newNode->data.set_categoria(categoria);
           }
-          else if (text.find("tiempo_preparacion") != string::npos)
+          else if (text.find("tiempo_preparacion=") != string::npos)
           {
             string tiempo_preparacion = tokenize(text);
             newNode->data.set_tiempo_preparacion(stof(tiempo_preparacion));
           }
-          else if (text.find("preparacion") != string::npos)
+          else if (text.find("preparacion=") != string::npos)
           {
             string preparacion = tokenize(text);
             newNode->data.set_preparacion(preparacion);
           }
-          else if (text.find("tipo") != string::npos)
+          else if (text.find("tipo=") != string::npos)
           {
             string tipo = tokenize(text);
             newNode->data.set_tipo(tipo);
@@ -204,7 +170,7 @@ void getAlimentosFromFile(AlimentoNode **anchor, string season, string category)
         }
 
         // Revisar si categoría coincide con la deseada
-        if (newNode->data.get_categoria().compare(category) != 0 || newNode->data.get_temporada().compare(season) != 0)
+        if (newNode->data.get_temporada().compare(season) != 0)
         {
           delete newNode;
         }
@@ -387,10 +353,11 @@ int getLastIDFromFile()
   // Read the file line by line
   while (getline(dataFile, text))
   {
-    if (text.find("id") != string::npos)
+    if (text.find("id=") != string::npos)
     {
       // Get ID
       string value = tokenize(text);
+      cout << value << endl;
       // Save ID
       if (value != "")
       {
