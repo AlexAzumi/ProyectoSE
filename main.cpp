@@ -121,6 +121,15 @@ int main()
     }
     case 12:
     {
+      clearConsole();
+
+      myMenu = getMyMenu();
+      nodeAnchor = myMenu.get_platillo_anchor();
+
+      break;
+    }
+    case 13:
+    {
       cout << endl;
       cout << "Saliendo del programa..." << endl;
 

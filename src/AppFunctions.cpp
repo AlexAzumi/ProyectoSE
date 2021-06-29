@@ -29,7 +29,8 @@ int getMenu()
   cout << "9. Editar platillo" << endl;
   cout << "10. Buscar platillo" << endl;
   cout << "11. Registrar una comanda" << endl;
-  cout << "12. Finalizar programa" << endl;
+  cout << "12. Generar nuevo menú" << endl;
+  cout << "13. Finalizar programa" << endl;
   cout << "Opción: ";
   cin >> option;
 
