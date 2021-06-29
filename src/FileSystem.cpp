@@ -361,7 +361,14 @@ int getLastIDFromFile()
       // Save ID
       if (value != "")
       {
-        lastID = stoi(value);
+        try
+        {
+          lastID = stoi(value);
+        }
+        catch (std::invalid_argument exception)
+        {
+          // The value obtained is not number. IGNORED
+        }
       }
     }
   }
