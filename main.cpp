@@ -35,9 +35,9 @@ using std::system;
 
 typedef AlimentoNode *AlimentoNodePointer;
 
-//nuevas funciones para usar Binary search
-int Size(AlimentoNodePointer nodeAnchor);
+// Nuevas funciones para usar Binary search
 AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer *nodeAnchor);
+int Size(AlimentoNodePointer nodeAnchor);
 void bubbleSortByID(AlimentoNodePointer *nodeAnchor);
 
 int main()
@@ -203,16 +203,16 @@ AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer
   if (Ini > Fin)
   {
     cout << "Entro a busqueda invalida, este valor nose encuentra en la lista:";
-    return 0;
+    return nullptr;
   }
-  if (*nodeAnchor == nullptr)
+  else if (*nodeAnchor == nullptr)
   {
     cout << endl;
     cout << "La lista está vacía" << endl;
 
     pauseScreen();
 
-    return 0;
+    return nullptr;
   }
 
   int mid = (Ini + Fin) / 2; // Posicion
@@ -230,6 +230,7 @@ AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer
       mitad = currentNode;
       break;
     }
+
     previousNode = currentNode;
     currentNode = currentNode->nextNode;
   }
@@ -257,12 +258,10 @@ AlimentoNodePointer SearchBinary(int data, int Ini, int Fin, AlimentoNodePointer
 
   if (data < mitad->data.get_id())
   {
-
-    SearchBinary(data, Ini, mid - 1, nodeAnchor);
+    return SearchBinary(data, Ini, mid - 1, nodeAnchor);
   }
   else
   {
-
-    SearchBinary(data, mid + 1, Fin, nodeAnchor);
-  };
+    return SearchBinary(data, mid + 1, Fin, nodeAnchor);
+  }
 }
